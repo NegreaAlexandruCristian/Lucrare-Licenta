@@ -1,6 +1,8 @@
 package com.webgisapplicationclientrepository.service;
 
 
+import com.webgisapplicationclientrepository.model.PublicInstitution;
+
 public interface SchoolService {
-    String getSchoolLocation(Long id);
+    PublicInstitution getSchoolLocation(Long id);
 }
