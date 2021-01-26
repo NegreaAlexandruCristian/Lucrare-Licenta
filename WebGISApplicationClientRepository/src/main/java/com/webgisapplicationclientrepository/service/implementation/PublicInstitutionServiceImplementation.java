@@ -6,7 +6,6 @@ import com.webgisapplicationclientrepository.service.PublicInstitutionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -23,7 +22,36 @@ public class PublicInstitutionServiceImplementation implements PublicInstitution
 
     @Override
     public List<PublicInstitution> getPreferredPublicLocations(String code) {
-        List<PublicInstitution> publicInstitutionsList =  publicInstitutionRepository.getPreferredPublicLocations(code);
-        return publicInstitutionsList;
+
+        if(code.equalsIgnoreCase("university")){
+
+            return publicInstitutionRepository.getUniversityLocations();
+
+        } else if(code.equalsIgnoreCase("school")){
+
+            return publicInstitutionRepository.getSchoolLocations();
+        }
+
+        return null;
+    }
+
+    @Override
+    public PublicInstitution getSchoolByName(String name) {
+        return publicInstitutionRepository.getSchoolByName(name);
+    }
+
+    @Override
+    public PublicInstitution getSchoolById(Long id) {
+        return publicInstitutionRepository.getSchoolById(id);
+    }
+
+    @Override
+    public PublicInstitution getUniversityByName(String name) {
+        return publicInstitutionRepository.getUniversityByName(name);
+    }
+
+    @Override
+    public PublicInstitution getUniversityById(Long id) {
+        return publicInstitutionRepository.getUniversityById(id);
     }
 }

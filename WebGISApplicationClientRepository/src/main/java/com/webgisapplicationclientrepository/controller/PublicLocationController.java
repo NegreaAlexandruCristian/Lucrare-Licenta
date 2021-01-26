@@ -24,7 +24,26 @@ public class PublicLocationController {
 
     @GetMapping("/get/{type}")
     public List<PublicInstitution> getPreferredPublicLocations(@PathVariable("type") String code){
-        System.out.println(code);
         return publicInstitutionService.getPreferredPublicLocations(code);
+    }
+
+    @GetMapping("/get/school/{name}")
+    public PublicInstitution getSchoolLocationByName(@PathVariable("name") String name){
+        return publicInstitutionService.getSchoolByName(name);
+    }
+
+    @GetMapping("/get/school/{id}")
+    public PublicInstitution getSchoolLocationById(@PathVariable("id") Long id){
+        return publicInstitutionService.getSchoolById(id);
+    }
+
+    @GetMapping("/get/university/{name}")
+    public PublicInstitution getUniversityLocationByName(@PathVariable("name") String name){
+        return publicInstitutionService.getUniversityByName(name);
+    }
+
+    @GetMapping("/get/university/{id}")
+    public PublicInstitution getUniversityLocationById(@PathVariable("id") Long id){
+        return publicInstitutionService.getUniversityById(id);
     }
 }

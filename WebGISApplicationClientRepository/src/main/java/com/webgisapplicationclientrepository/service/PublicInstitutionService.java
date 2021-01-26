@@ -7,4 +7,12 @@ import java.util.List;
 
 public interface PublicInstitutionService {
     List<PublicInstitution> getPreferredPublicLocations(String code);
+
+    PublicInstitution getSchoolByName(String name);
+
+    PublicInstitution getSchoolById(Long id);
+
+    PublicInstitution getUniversityByName(String name);
+
+    PublicInstitution getUniversityById(Long id);
 }
