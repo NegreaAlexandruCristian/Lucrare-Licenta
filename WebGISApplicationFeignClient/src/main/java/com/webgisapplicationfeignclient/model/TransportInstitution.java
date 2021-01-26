@@ -1,16 +1,20 @@
 package com.webgisapplicationfeignclient.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+
+import java.math.BigDecimal;
 
 @Getter
 @Setter
-@AllArgsConstructor
+@ToString
 @NoArgsConstructor
+@AllArgsConstructor
+@EqualsAndHashCode(callSuper = false)
 public class TransportInstitution{
 
+    private Long id;
     private String name;
     private String code;
+    private BigDecimal latitude;
+    private BigDecimal longitude;
 }

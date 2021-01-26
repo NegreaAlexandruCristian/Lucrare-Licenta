@@ -26,4 +26,24 @@ public class PublicInstitutionResourceController{
 
         return publicInstitutionServiceFeign.getPreferredPublicLocations(code);
     }
+
+    @GetMapping("/get/school/{name}")
+    public PublicInstitution getSchoolLocationByName(@PathVariable("name") String name){
+        return publicInstitutionServiceFeign.getSchoolLocationByName(name);
+    }
+
+    @GetMapping("/get/school/{id}")
+    public PublicInstitution getSchoolLocationById(@PathVariable("id") Long id){
+        return publicInstitutionServiceFeign.getSchoolLocationById(id);
+    }
+
+    @GetMapping("/get/university/{name}")
+    public PublicInstitution getUniversityLocationByName(@PathVariable("name") String name){
+        return publicInstitutionServiceFeign.getUniversityLocationByName(name);
+    }
+
+    @GetMapping("/get/university/{id}")
+    public PublicInstitution getUniversityLocationById(@PathVariable("id") Long id){
+        return publicInstitutionServiceFeign.getUniversityLocationById(id);
+    }
 }
