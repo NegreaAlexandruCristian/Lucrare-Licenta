@@ -2,6 +2,7 @@ package com.webgisapplicationfeignclient.model;
 
 import lombok.*;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 
 @Getter
@@ -10,7 +11,7 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = false)
-public class TransportInstitution{
+public class TransportInstitution implements Serializable {
 
     private Long id;
     private String name;
