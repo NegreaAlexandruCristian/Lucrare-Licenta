@@ -6,6 +6,7 @@ import com.webgisapplicationclientrepository.service.PublicInstitutionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -19,6 +20,14 @@ public class PublicInstitutionServiceImplementation implements PublicInstitution
         this.publicInstitutionRepository = publicInstitutionRepository;
     }
 
+
+    @Override
+    public List<PublicInstitution> getAllPublicLocations() {
+        List<PublicInstitution> publicInstitutions = publicInstitutionRepository.getSchoolLocations();
+        publicInstitutions.addAll(publicInstitutionRepository.getUniversityLocations());
+
+        return publicInstitutions;
+    }
 
     @Override
     public List<PublicInstitution> getPreferredPublicLocations(String code) {
@@ -42,6 +51,7 @@ public class PublicInstitutionServiceImplementation implements PublicInstitution
 
     @Override
     public PublicInstitution getSchoolById(Long id) {
+        System.out.println(id);
         return publicInstitutionRepository.getSchoolById(id);
     }
 

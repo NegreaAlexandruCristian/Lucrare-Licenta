@@ -6,6 +6,9 @@ import com.webgisapplicationclientrepository.model.PublicInstitution;
 import java.util.List;
 
 public interface PublicInstitutionService {
+
+    List<PublicInstitution> getAllPublicLocations();
+
     List<PublicInstitution> getPreferredPublicLocations(String code);
 
     PublicInstitution getSchoolByName(String name);
