@@ -3,12 +3,12 @@ package com.webgisapplicationfeignclient.controller;
 import com.webgisapplicationfeignclient.model.MedicalInstitution;
 import com.webgisapplicationfeignclient.model.PublicInstitution;
 import com.webgisapplicationfeignclient.model.TransportInstitution;
+import com.webgisapplicationfeignclient.model.util.Institution;
+import com.webgisapplicationfeignclient.model.util.ObjectWrapper;
+import com.webgisapplicationfeignclient.model.util.Point;
 import com.webgisapplicationfeignclient.service.ClientServiceFeign;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -105,5 +105,15 @@ public class ClientResourceController {
     @GetMapping("/transport/locations/get/bus/station/id/{id}")
     public TransportInstitution getBusStationLocationById(@PathVariable("id") Long id){
         return clientServiceFeign.getBusStationLocationById(id);
+    }
+
+    @PostMapping("/user/location/distance")
+    public Number calculateDistance(@RequestBody ObjectWrapper objectWrapper){
+        return clientServiceFeign.calculateDistance(objectWrapper);
+    }
+
+    @PostMapping("/user/location/zone")
+    public List<Institution> getLocationsFromZone(@RequestBody Point point){
+        return clientServiceFeign.getLocationsFromZone(point);
     }
 }

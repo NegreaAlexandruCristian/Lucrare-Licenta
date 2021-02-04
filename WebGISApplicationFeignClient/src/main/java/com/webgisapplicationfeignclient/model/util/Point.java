@@ -1,4 +1,4 @@
-package com.webgisapplicationclientrepository.model.util;
+package com.webgisapplicationfeignclient.model.util;
 
 import lombok.*;
 
@@ -10,6 +10,7 @@ import java.math.BigDecimal;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
+@EqualsAndHashCode(callSuper = false)
 public class Point{
 
     private String code;

@@ -3,13 +3,13 @@ package com.webgisapplicationclientrepository.service.implementation;
 import com.webgisapplicationclientrepository.model.util.Institution;
 import com.webgisapplicationclientrepository.model.util.ObjectWrapper;
 import com.webgisapplicationclientrepository.model.util.Point;
-import com.webgisapplicationclientrepository.model.util.ZoneWrapper;
 import com.webgisapplicationclientrepository.repository.UserRepository;
 import com.webgisapplicationclientrepository.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.math.BigDecimal;
+import java.util.Arrays;
+import java.util.List;
 
 @Service
 public class UserServiceImplementation implements UserService {
@@ -22,20 +22,18 @@ public class UserServiceImplementation implements UserService {
     }
 
     @Override
-    public BigDecimal getDistance(ObjectWrapper objectWrapper) {
+    public Number calculateDistance(ObjectWrapper objectWrapper) {
 
         Point fromDistance = objectWrapper.getFromDistance();
         Point toDistance = objectWrapper.getToDistance();
-        return userRepository.getDistance(fromDistance.getLatitude(), fromDistance.getLongitude(),
+        return userRepository.calculateDistance(fromDistance.getLatitude(), fromDistance.getLongitude(),
                 toDistance.getLatitude(), toDistance.getLongitude());
     }
 
     @Override
-    public Institution getLocationsFromZone(ZoneWrapper zoneWrapper) {
-        Point point = zoneWrapper.getPoint();
-        Institution institution = zoneWrapper.getInstitution();
+    public List<Institution> getLocationsFromZone(Point point){
         return userRepository.getLocationsFromZone(point.getLatitude(), point.getLongitude(),
-                institution.getCode(),10);
+                point.getCode(),point.getRadius());
     }
 
 }
