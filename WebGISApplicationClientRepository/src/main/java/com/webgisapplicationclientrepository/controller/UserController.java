@@ -26,7 +26,13 @@ public class UserController {
     }
 
     @PostMapping("/zone")
-    public List<Institution> getLocationsFromZone(@RequestBody Point point){
+    public List<Institution> getSpecificLocationsFromZone(@RequestBody Point point){
         return userService.getLocationsFromZone(point);
     }
+
+    @PostMapping("/all")
+    public List<Institution> getAllLocationsFromZone(@RequestBody Point point){
+        return userService.getAllLocationsFromZone(point);
+    }
+
 }

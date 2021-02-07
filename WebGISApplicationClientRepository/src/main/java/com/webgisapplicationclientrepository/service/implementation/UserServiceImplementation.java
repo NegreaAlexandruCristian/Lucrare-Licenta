@@ -8,13 +8,16 @@ import com.webgisapplicationclientrepository.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
 public class UserServiceImplementation implements UserService {
 
     private final UserRepository userRepository;
+    private final String tableNames[] = new String []{
+            "buss_stations", "hospital","pharmacy", "schools", "university"
+    };
 
     @Autowired
     public UserServiceImplementation(UserRepository userRepository) {
@@ -34,6 +37,16 @@ public class UserServiceImplementation implements UserService {
     public List<Institution> getLocationsFromZone(Point point){
         return userRepository.getLocationsFromZone(point.getLatitude(), point.getLongitude(),
                 point.getCode(),point.getRadius());
+    }
+
+    @Override
+    public List<Institution> getAllLocationsFromZone(Point point) {
+        List<Institution> institutionList = new ArrayList<>();
+        for(String tableName: tableNames){
+            institutionList.addAll(userRepository.getLocationsFromZone(point.getLatitude(), point.getLongitude(),
+                    tableName,point.getRadius()));
+        }
+        return institutionList;
     }
 
 }

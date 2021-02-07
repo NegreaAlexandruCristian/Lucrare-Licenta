@@ -2,7 +2,6 @@ package com.webgisapplicationclientrepository.model.util;
 
 import lombok.*;
 
-import java.io.Serializable;
 import java.math.BigDecimal;
 
 @Setter

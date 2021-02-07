@@ -116,4 +116,9 @@ public class ClientResourceController {
     public List<Institution> getLocationsFromZone(@RequestBody Point point){
         return clientServiceFeign.getLocationsFromZone(point);
     }
+
+    @PostMapping("/user/location/all")
+    public List<Institution> getAllLocationsFromZone(@RequestBody Point point){
+        return clientServiceFeign.getLocationsFromZone(point);
+    }
 }

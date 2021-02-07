@@ -12,4 +12,6 @@ public interface UserService {
     Number calculateDistance(ObjectWrapper objectWrapper);
 
     List<Institution> getLocationsFromZone(Point point);
+
+    List<Institution> getAllLocationsFromZone(Point point);
 }

@@ -71,4 +71,7 @@ public interface ClientServiceFeign {
     @PostMapping("/user/location/zone")
     List<Institution> getLocationsFromZone(@RequestBody Point point);
 
+    @PostMapping("/user/location/all")
+    public List<Institution> getAllLocationsFromZone(@RequestBody Point point);
+
 }

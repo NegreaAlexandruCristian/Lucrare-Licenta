@@ -2,8 +2,6 @@ package com.webgisapplicationfeignclient.model.util;
 
 import lombok.*;
 
-import java.io.Serializable;
-
 @Setter
 @Getter
 @NoArgsConstructor
