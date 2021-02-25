@@ -1,0 +1,4 @@
+To add further :
+    - To add implementation of Swagger to the application : https://swagger.io/
+    - CircleCI : https://circleci.com/?return-to=https%3A%2F%2Fapp.circleci.com%2Fpipelines%2Fgithub%2Fspringframeworkguru%2Fspring-rest-client-examples
+    - CodeCov : https://codecov.io/gh

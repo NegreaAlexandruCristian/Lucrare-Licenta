@@ -72,6 +72,9 @@ public interface ClientServiceFeign {
     List<Institution> getLocationsFromZone(@RequestBody Point point);
 
     @PostMapping("/user/location/all")
-    public List<Institution> getAllLocationsFromZone(@RequestBody Point point);
+    List<Institution> getAllLocationsFromZone(@RequestBody Point point);
+
+    @PostMapping("/user/location/shortest")
+    Institution getShortestLocationFromZone(@RequestBody Point point);
 
 }

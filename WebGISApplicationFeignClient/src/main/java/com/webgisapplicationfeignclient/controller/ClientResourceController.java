@@ -121,4 +121,9 @@ public class ClientResourceController {
     public List<Institution> getAllLocationsFromZone(@RequestBody Point point){
         return clientServiceFeign.getLocationsFromZone(point);
     }
+
+    @PostMapping("/user/location/shortest")
+    Institution getShortestLocationFromZone(@RequestBody Point point){
+        return clientServiceFeign.getShortestLocationFromZone(point);
+    }
 }

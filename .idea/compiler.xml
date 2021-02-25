@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="webgisapplicationclientgeotools" />
+        <module name="webgisapplicationserver" />
+        <module name="webgisapplicationzuulproxy" />
+        <module name="webgisapplicationclientrepository" />
+        <module name="webgisapplicationfeignclient" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="webgisapplicationclientgeotools" target="11" />
+      <module name="webgisapplicationclientrepository" target="11" />
+      <module name="webgisapplicationfeignclient" target="11" />
+      <module name="webgisapplicationserver" target="11" />
+      <module name="webgisapplicationzuulproxy" target="11" />
+    </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="webgisapplicationclientgeotools" options="-parameters" />
+      <module name="webgisapplicationclientrepository" options="-parameters" />
+      <module name="webgisapplicationfeignclient" options="-parameters" />
+      <module name="webgisapplicationserver" options="-parameters" />
+      <module name="webgisapplicationzuulproxy" options="-parameters" />
+    </option>
+  </component>
+</project>

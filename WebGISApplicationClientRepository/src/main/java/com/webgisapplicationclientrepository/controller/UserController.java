@@ -35,4 +35,9 @@ public class UserController {
         return userService.getAllLocationsFromZone(point);
     }
 
+    @PostMapping("/shortest")
+    public Institution getShortestLocationFromZone(@RequestBody Point point){
+        return userService.getShortestLocationFromZone(point);
+    }
+
 }

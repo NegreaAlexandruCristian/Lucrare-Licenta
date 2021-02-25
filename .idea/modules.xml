@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/Lucrare-Licenta.iml" filepath="$PROJECT_DIR$/.idea/Lucrare-Licenta.iml" />
+      <module fileurl="file://$PROJECT_DIR$/WebGISApplicationClientGeoTools/webgisapplicationclientgeotools.iml" filepath="$PROJECT_DIR$/WebGISApplicationClientGeoTools/webgisapplicationclientgeotools.iml" />
+      <module fileurl="file://$PROJECT_DIR$/WebGISApplicationClientRepository/webgisapplicationclientrepository.iml" filepath="$PROJECT_DIR$/WebGISApplicationClientRepository/webgisapplicationclientrepository.iml" />
+      <module fileurl="file://$PROJECT_DIR$/WebGISApplicationFeignClient/webgisapplicationfeignclient.iml" filepath="$PROJECT_DIR$/WebGISApplicationFeignClient/webgisapplicationfeignclient.iml" />
+      <module fileurl="file://$PROJECT_DIR$/WebGISApplicationServer/webgisapplicationserver.iml" filepath="$PROJECT_DIR$/WebGISApplicationServer/webgisapplicationserver.iml" />
+      <module fileurl="file://$PROJECT_DIR$/WebGISApplicationZuulProxy/webgisapplicationzuulproxy.iml" filepath="$PROJECT_DIR$/WebGISApplicationZuulProxy/webgisapplicationzuulproxy.iml" />
+    </modules>
+  </component>
+</project>

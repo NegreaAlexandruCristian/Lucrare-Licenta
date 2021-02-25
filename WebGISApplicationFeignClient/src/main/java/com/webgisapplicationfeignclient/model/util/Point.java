@@ -4,12 +4,9 @@ import lombok.*;
 
 import java.math.BigDecimal;
 
-@Setter
-@Getter
-@ToString
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode(callSuper = false)
 public class Point{
 
     private String code;

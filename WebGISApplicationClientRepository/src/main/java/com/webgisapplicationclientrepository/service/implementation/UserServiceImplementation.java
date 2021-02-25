@@ -27,8 +27,10 @@ public class UserServiceImplementation implements UserService {
     @Override
     public Number calculateDistance(ObjectWrapper objectWrapper) {
 
-        Point fromDistance = objectWrapper.getFromDistance();
-        Point toDistance = objectWrapper.getToDistance();
+        Point fromDistance = objectWrapper.getStartingDistance();
+        Point toDistance = objectWrapper.getFinishDestination();
+        System.out.println(toDistance);
+        System.out.println(fromDistance);
         return userRepository.calculateDistance(fromDistance.getLatitude(), fromDistance.getLongitude(),
                 toDistance.getLatitude(), toDistance.getLongitude());
     }
@@ -47,6 +49,11 @@ public class UserServiceImplementation implements UserService {
                     tableName,point.getRadius()));
         }
         return institutionList;
+    }
+
+    @Override
+    public Institution getShortestLocationFromZone(Point point){
+        return userRepository.getShortestLocationFromZone(point);
     }
 
 }

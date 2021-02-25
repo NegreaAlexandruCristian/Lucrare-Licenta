@@ -28,3 +28,4 @@ zuul:
       path: /repository/**
       serviceId: web-gis-client-repository
       stripPrefix: true
+

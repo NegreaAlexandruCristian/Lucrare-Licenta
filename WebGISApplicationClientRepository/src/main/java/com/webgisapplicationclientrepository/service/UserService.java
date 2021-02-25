@@ -14,4 +14,6 @@ public interface UserService {
     List<Institution> getLocationsFromZone(Point point);
 
     List<Institution> getAllLocationsFromZone(Point point);
+
+    Institution getShortestLocationFromZone(Point point);
 }

@@ -5,9 +5,7 @@ import lombok.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
 
-@Setter
-@Getter
-@ToString
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class Institution implements Serializable {
