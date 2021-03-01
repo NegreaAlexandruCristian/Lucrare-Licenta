@@ -1,6 +1,7 @@
 package com.webgisapplicationclientgeotools.models;
 
 import lombok.*;
+import org.locationtech.jts.geom.Geometry;
 
 import java.math.BigDecimal;
 

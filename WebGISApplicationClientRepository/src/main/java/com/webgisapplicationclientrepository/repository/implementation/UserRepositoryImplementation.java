@@ -35,7 +35,8 @@ public class UserRepositoryImplementation implements UserRepository {
         Query query = entityManager.createNativeQuery(
                 "SELECT table_name.id AS id, table_name.nume AS name, table_name.code AS code, ST_X(table_name.geom) AS longitude, ST_Y(table_name.geom) AS latitude" +
                 " FROM " + code + " AS table_name " +
-                        " WHERE ST_PointInsideCircle(table_name.geom, " + latitude + "," + longitude +"," + radius +" * 0.00001);", Institution.class);
+                        "WHERE ST_DWithin(table_name.geom," + "ST_GeogFromText('POINT(" + longitude  + " " + latitude + ")'), " + radius + ")"
+                        /*" WHERE ST_PointInsideCircle(table_name.geom, " + longitude + "," + latitude +"," + radius +" * 0.00001);"*/ , Institution.class);
         return query.getResultList();
     }
 
