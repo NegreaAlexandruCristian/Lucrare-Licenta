@@ -103,7 +103,7 @@ public class ClientResourceController {
 
     @PostMapping("/user/location/all")
     public List<Institution> getAllLocationsFromZone(@RequestBody Point point){
-        return clientServiceFeign.getLocationsFromZone(point);
+        return clientServiceFeign.getAllLocationsFromZone(point);
     }
 
     @PostMapping("/user/location/shortest")

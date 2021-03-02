@@ -15,7 +15,7 @@ import java.util.List;
 public class UserServiceImplementation implements UserService {
 
     private final UserRepository userRepository;
-    private final String tableNames[] = new String []{
+    private final String[] tableNames = new String []{
             "buss_stations", "hospital","pharmacy", "schools", "university"
     };
 
@@ -29,8 +29,6 @@ public class UserServiceImplementation implements UserService {
 
         Point fromDistance = objectWrapper.getStartingDistance();
         Point toDistance = objectWrapper.getFinishDestination();
-        System.out.println(toDistance);
-        System.out.println(fromDistance);
         return userRepository.calculateDistance(fromDistance.getLatitude(), fromDistance.getLongitude(),
                 toDistance.getLatitude(), toDistance.getLongitude());
     }
@@ -44,7 +42,10 @@ public class UserServiceImplementation implements UserService {
     @Override
     public List<Institution> getAllLocationsFromZone(Point point) {
         List<Institution> institutionList = new ArrayList<>();
+        System.out.println("HERE");
         for(String tableName: tableNames){
+            System.out.println(userRepository.getLocationsFromZone(point.getLatitude(), point.getLongitude(),
+                    tableName,point.getRadius()));
             institutionList.addAll(userRepository.getLocationsFromZone(point.getLatitude(), point.getLongitude(),
                     tableName,point.getRadius()));
         }
