@@ -1,14 +1,14 @@
 package com.webgisapplicationclientrepository.service.implementation;
 
 import com.webgisapplicationclientrepository.model.MedicalInstitution;
-import com.webgisapplicationclientrepository.model.PublicInstitution;
 import com.webgisapplicationclientrepository.repository.MedicalInstitutionRepository;
 import com.webgisapplicationclientrepository.service.MedicalInstitutionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Locale;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Service
 public class MedicalInstitutionServiceImplementation implements MedicalInstitutionService {
@@ -36,10 +36,9 @@ public class MedicalInstitutionServiceImplementation implements MedicalInstituti
 
     @Override
     public List<MedicalInstitution> getAllMedicalLocations() {
-        List<MedicalInstitution> medicalInstitutions = medicalInstitutionRepository.getHospitalLocations();
-        medicalInstitutions.addAll(medicalInstitutionRepository.getPharmacyLocations());
-
-        return medicalInstitutions;
+        return Stream.concat(medicalInstitutionRepository.getPharmacyLocations().stream(),
+                medicalInstitutionRepository.getHospitalLocations().stream())
+                .collect(Collectors.toList());
     }
 
     @Override
@@ -70,7 +69,6 @@ public class MedicalInstitutionServiceImplementation implements MedicalInstituti
             case "pharmacy":{
                 return medicalInstitutionRepository.getPharmacyById(id);
             }
-
             default:{
                 return null;
                 //TODO exception
