@@ -35,24 +35,16 @@ public class ClientResourceController {
         return clientServiceFeign.getPreferredPublicLocations(code);
     }
 
-    @GetMapping("/public/locations/get/school/name/{name}")
-    public PublicInstitution getSchoolLocationByName(@PathVariable("name") String name){
-        return clientServiceFeign.getSchoolLocationByName(name);
+    @GetMapping("/public/locations/get/{code}/name/{name}")
+    PublicInstitution getPublicInstitutionLocationByName(@PathVariable("code") String code,
+                                                         @PathVariable("name") String name){
+        return clientServiceFeign.getPublicInstitutionLocationByName(code, name);
     }
 
-    @GetMapping("/public/locations/get/school/id/{id}")
-    public PublicInstitution getSchoolLocationById(@PathVariable("id") Long id){
-        return clientServiceFeign.getSchoolLocationById(id);
-    }
-
-    @GetMapping("/public/locations/get/university/name/{name}")
-    public PublicInstitution getUniversityLocationByName(@PathVariable("name") String name){
-        return clientServiceFeign.getUniversityLocationByName(name);
-    }
-
-    @GetMapping("/public/locations/get/university/id/{id}")
-    public PublicInstitution getUniversityLocationById(@PathVariable("id") Long id){
-        return clientServiceFeign.getUniversityLocationById(id);
+    @GetMapping("/public/locations/get/{code}/id/{id}")
+    PublicInstitution getPublicInstitutionLocationById(@PathVariable("code") String code,
+                                                       @PathVariable("id") Long id){
+        return clientServiceFeign.getPublicInstitutionLocationById(code, id);
     }
 
     @GetMapping("/medical/locations/get")
@@ -66,24 +58,16 @@ public class ClientResourceController {
         return clientServiceFeign.getPreferredMedicalLocations(code);
     }
 
-    @GetMapping("/medical/locations/get/hospital/name/{name}")
-    public MedicalInstitution getHospitalLocationByName(@PathVariable("name") String name){
-        return clientServiceFeign.getHospitalLocationByName(name);
+    @GetMapping("/medical/locations/get/{code}/name/{name}")
+    public MedicalInstitution getMedicalInstitutionLocationByName(@PathVariable(name = "code") String code,
+                                                                  @PathVariable(name = "name") String name){
+        return clientServiceFeign.getMedicalInstitutionLocationByName(code, name);
     }
 
-    @GetMapping("/medical/locations/get/hospital/id/{id}")
-    public MedicalInstitution getHospitalLocationById(@PathVariable("id") Long id){
-        return clientServiceFeign.getHospitalLocationById(id);
-    }
-
-    @GetMapping("/medical/locations/get/pharmacy/name/{name}")
-    public MedicalInstitution getPharmacyLocationByName(@PathVariable("name") String name){
-        return clientServiceFeign.getPharmacyLocationByName(name);
-    }
-
-    @GetMapping("/medical/locations/get/pharmacy/id/{id}")
-    public MedicalInstitution getPharmacyLocationById(@PathVariable("id") Long id){
-        return clientServiceFeign.getPharmacyLocationById(id);
+    @GetMapping("/medical/locations/get/{code}/id/{id}")
+    public MedicalInstitution getMedicalInstitutionLocationById(@PathVariable(name = "code") String code,
+                                                                @PathVariable(name = "id") Long id){
+        return clientServiceFeign.getMedicalInstitutionLocationById(code, id);
     }
 
     @GetMapping("/transport/locations/get")

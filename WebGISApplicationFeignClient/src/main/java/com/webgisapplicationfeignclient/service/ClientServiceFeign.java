@@ -23,17 +23,13 @@ public interface ClientServiceFeign {
     @GetMapping("/public/locations/get/{type}")
     List<PublicInstitution> getPreferredPublicLocations(@PathVariable("type") String code);
 
-    @GetMapping("/public/locations/get/school/name/{name}")
-    PublicInstitution getSchoolLocationByName(@PathVariable("name") String name);
+    @GetMapping("/public/locations/get/{code}/name/{name}")
+    PublicInstitution getPublicInstitutionLocationByName(@PathVariable("code") String code,
+                                                         @PathVariable("name") String name);
 
-    @GetMapping("/public/locations/get/school/id/{id}")
-    PublicInstitution getSchoolLocationById(@PathVariable("id") Long id);
-
-    @GetMapping("/public/locations/get/university/name/{name}")
-    PublicInstitution getUniversityLocationByName(@PathVariable("name") String name);
-
-    @GetMapping("/public/locations/get/university/id/{id}")
-    PublicInstitution getUniversityLocationById(@PathVariable("id") Long id);
+    @GetMapping("/public/locations/get/{code}/id/{id}")
+    PublicInstitution getPublicInstitutionLocationById(@PathVariable("code") String code,
+                                                       @PathVariable("id") Long id);
 
     @GetMapping("/medical/locations/get")
     List<MedicalInstitution> getAllMedicalLocations();
@@ -41,17 +37,13 @@ public interface ClientServiceFeign {
     @GetMapping("/medical/locations/get/{type}")
     List<MedicalInstitution> getPreferredMedicalLocations(@PathVariable("type") String code);
 
-    @GetMapping("/medical/locations/get/hospital/name/{name}")
-    MedicalInstitution getHospitalLocationByName(@PathVariable("name") String name);
+    @GetMapping("/medical/locations/get/{code}/name/{name}")
+    MedicalInstitution getMedicalInstitutionLocationByName(@PathVariable(name = "code") String code,
+                                                                  @PathVariable(name = "name") String name);
 
-    @GetMapping("/medical/locations/get/hospital/id/{id}")
-    MedicalInstitution getHospitalLocationById(@PathVariable("id") Long id);
-
-    @GetMapping("/medical/locations/get/pharmacy/name/{name}")
-    MedicalInstitution getPharmacyLocationByName(@PathVariable("name") String name);
-
-    @GetMapping("/medical/locations/get/pharmacy/id/{id}")
-    MedicalInstitution getPharmacyLocationById(@PathVariable("id") Long id);
+    @GetMapping("/medical/locations/get/{code}/id/{id}")
+    MedicalInstitution getMedicalInstitutionLocationById(@PathVariable(name = "code") String code,
+                                                         @PathVariable("id") Long id);
 
     @GetMapping("/transport/locations/get")
     List<TransportInstitution> getAllTransportLocations();

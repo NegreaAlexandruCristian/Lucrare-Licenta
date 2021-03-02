@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Locale;
 
 @Service
 public class MedicalInstitutionServiceImplementation implements MedicalInstitutionService {
@@ -30,28 +31,7 @@ public class MedicalInstitutionServiceImplementation implements MedicalInstituti
 
             return medicalInstitutionRepository.getPharmacyLocations();
         }
-
         return null;
-    }
-
-    @Override
-    public MedicalInstitution getHospitalByName(String name) {
-        return medicalInstitutionRepository.getHospitalByName(name);
-    }
-
-    @Override
-    public MedicalInstitution getHospitalById(Long id) {
-        return medicalInstitutionRepository.getHospitalById(id);
-    }
-
-    @Override
-    public MedicalInstitution getPharmacyByName(String name) {
-        return medicalInstitutionRepository.getPharmacyByName(name);
-    }
-
-    @Override
-    public MedicalInstitution getPharmacyById(Long id) {
-        return medicalInstitutionRepository.getPharmacyById(id);
     }
 
     @Override
@@ -60,5 +40,41 @@ public class MedicalInstitutionServiceImplementation implements MedicalInstituti
         medicalInstitutions.addAll(medicalInstitutionRepository.getPharmacyLocations());
 
         return medicalInstitutions;
+    }
+
+    @Override
+    public MedicalInstitution getMedicalInstitutionByName(String code, String name) {
+
+        String newCode = code.toLowerCase();
+        switch (newCode){
+            case "hospital":{
+                return medicalInstitutionRepository.getHospitalByName(name);
+            }
+            case "pharmacy":{
+                return medicalInstitutionRepository.getPharmacyByName(name);
+            }
+            default: {
+                return null;
+                //TODO exception
+            }
+        }
+    }
+
+    @Override
+    public MedicalInstitution getMedicalInstitutionById(String code, Long id) {
+        String newCode = code.toLowerCase();
+        switch (newCode){
+            case "hospital":{
+                return medicalInstitutionRepository.getHospitalById(id);
+            }
+            case "pharmacy":{
+                return medicalInstitutionRepository.getPharmacyById(id);
+            }
+
+            default:{
+                return null;
+                //TODO exception
+            }
+        }
     }
 }

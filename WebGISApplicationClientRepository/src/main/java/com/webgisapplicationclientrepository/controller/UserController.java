@@ -12,6 +12,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/user/location")
+// TODO Swagger Documentation
 public class UserController {
 
     private final UserService userService;
@@ -22,26 +23,25 @@ public class UserController {
     }
 
     @PostMapping("/distance")
-    @ResponseStatus(value = HttpStatus.OK)
-    //requestBody = @RequestBody(required = true, content = @Content(mediaType = "JSON")
+    @ResponseStatus(value = HttpStatus.OK, code = HttpStatus.OK)
     public Number calculateDistance(@RequestBody ObjectWrapper objectWrapper){
         return userService.calculateDistance(objectWrapper);
     }
 
     @PostMapping("/zone")
-    @ResponseStatus(value = HttpStatus.OK)
+    @ResponseStatus(value = HttpStatus.OK, code = HttpStatus.OK)
     public List<Institution> getSpecificLocationsFromZone(@RequestBody Point point){
         return userService.getLocationsFromZone(point);
     }
 
     @PostMapping("/all")
-    @ResponseStatus(value = HttpStatus.OK)
+    @ResponseStatus(value = HttpStatus.OK, code = HttpStatus.OK)
     public List<Institution> getAllLocationsFromZone(@RequestBody Point point){
         return userService.getAllLocationsFromZone(point);
     }
 
     @PostMapping("/shortest")
-    @ResponseStatus(value = HttpStatus.OK)
+    @ResponseStatus(value = HttpStatus.OK, code = HttpStatus.OK)
     public Institution getShortestLocationFromZone(@RequestBody Point point){
         return userService.getShortestLocationFromZone(point);
     }

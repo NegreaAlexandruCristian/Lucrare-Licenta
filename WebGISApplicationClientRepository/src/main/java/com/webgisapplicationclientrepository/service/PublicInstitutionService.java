@@ -11,11 +11,7 @@ public interface PublicInstitutionService {
 
     List<PublicInstitution> getPreferredPublicLocations(String code);
 
-    PublicInstitution getSchoolByName(String name);
+    PublicInstitution getPublicInstitutionByName(String code, String name);
 
-    PublicInstitution getSchoolById(Long id);
-
-    PublicInstitution getUniversityByName(String name);
-
-    PublicInstitution getUniversityById(Long id);
+    PublicInstitution getPublicInstitutionById(String code, Long id);
 }

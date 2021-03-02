@@ -9,13 +9,9 @@ public interface MedicalInstitutionService {
 
     List<MedicalInstitution> getPreferredMedicalLocations(String code);
 
-    MedicalInstitution getHospitalByName(String name);
-
-    MedicalInstitution getHospitalById(Long id);
-
-    MedicalInstitution getPharmacyByName(String name);
-
-    MedicalInstitution getPharmacyById(Long id);
-
     List<MedicalInstitution> getAllMedicalLocations();
+
+    MedicalInstitution getMedicalInstitutionByName(String code, String name);
+
+    MedicalInstitution getMedicalInstitutionById(String code, Long id);
 }

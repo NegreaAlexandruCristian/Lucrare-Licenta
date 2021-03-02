@@ -52,4 +52,5 @@ public interface MedicalInstitutionRepository extends CrudRepository<MedicalInst
             " WHERE pharmacy.nume = ?1"
             ,nativeQuery = true)
     MedicalInstitution getPharmacyByName(String name);
+
 }

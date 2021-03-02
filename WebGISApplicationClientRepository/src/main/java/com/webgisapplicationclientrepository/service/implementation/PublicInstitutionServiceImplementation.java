@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 
 @Service
@@ -20,13 +22,11 @@ public class PublicInstitutionServiceImplementation implements PublicInstitution
         this.publicInstitutionRepository = publicInstitutionRepository;
     }
 
-
     @Override
     public List<PublicInstitution> getAllPublicLocations() {
-        List<PublicInstitution> publicInstitutions = publicInstitutionRepository.getSchoolLocations();
-        publicInstitutions.addAll(publicInstitutionRepository.getUniversityLocations());
-
-        return publicInstitutions;
+        return Stream.concat(publicInstitutionRepository.getUniversityLocations().stream(),
+                publicInstitutionRepository.getSchoolLocations().stream())
+                .collect(Collectors.toList());
     }
 
     @Override
@@ -45,23 +45,38 @@ public class PublicInstitutionServiceImplementation implements PublicInstitution
     }
 
     @Override
-    public PublicInstitution getSchoolByName(String name) {
-        return publicInstitutionRepository.getSchoolByName(name);
+    public PublicInstitution getPublicInstitutionByName(String code, String name) {
+        String newCode = code.toLowerCase();
+        switch (newCode){
+            case "school":{
+                return publicInstitutionRepository.getSchoolByName(name);
+            }
+            case "university":{
+                return publicInstitutionRepository.getUniversityByName(name);
+            }
+            default: {
+                return null;
+                //TODO exception
+            }
+        }
     }
 
     @Override
-    public PublicInstitution getSchoolById(Long id) {
-        System.out.println(id);
-        return publicInstitutionRepository.getSchoolById(id);
+    public PublicInstitution getPublicInstitutionById(String code, Long id) {
+        String newCode = code.toLowerCase();
+        switch (newCode){
+            case "school":{
+                return publicInstitutionRepository.getSchoolById(id);
+            }
+            case "university":{
+                return publicInstitutionRepository.getUniversityById(id);
+            }
+            default: {
+                return null;
+                //TODO exception
+            }
+        }
     }
 
-    @Override
-    public PublicInstitution getUniversityByName(String name) {
-        return publicInstitutionRepository.getUniversityByName(name);
-    }
 
-    @Override
-    public PublicInstitution getUniversityById(Long id) {
-        return publicInstitutionRepository.getUniversityById(id);
-    }
 }
