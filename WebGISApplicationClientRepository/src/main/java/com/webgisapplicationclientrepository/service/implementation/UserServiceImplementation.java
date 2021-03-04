@@ -1,5 +1,6 @@
 package com.webgisapplicationclientrepository.service.implementation;
 
+import com.webgisapplicationclientrepository.exceptions.ConstraintViolationExceptionCustom;
 import com.webgisapplicationclientrepository.model.util.Institution;
 import com.webgisapplicationclientrepository.model.util.ObjectWrapper;
 import com.webgisapplicationclientrepository.model.util.Point;
@@ -24,13 +25,24 @@ public class UserServiceImplementation implements UserService {
         this.userRepository = userRepository;
     }
 
+    private boolean checkConstraints(Point fromDistance, Point toDistance) {
+        if(fromDistance.getLongitude() == null || fromDistance.getLatitude() == null){
+            return false;
+        } else return toDistance.getLongitude() != null && toDistance.getLatitude() != null;
+    }
+
+
     @Override
     public Number calculateDistance(ObjectWrapper objectWrapper) {
 
         Point fromDistance = objectWrapper.getStartingDistance();
         Point toDistance = objectWrapper.getFinishDestination();
-        return userRepository.calculateDistance(fromDistance.getLatitude(), fromDistance.getLongitude(),
-                toDistance.getLatitude(), toDistance.getLongitude());
+        if (checkConstraints(fromDistance, toDistance)) {
+            return userRepository.calculateDistance(fromDistance.getLatitude(), fromDistance.getLongitude(),
+                    toDistance.getLatitude(), toDistance.getLongitude());
+        } else {
+            throw new ConstraintViolationExceptionCustom();
+        }
     }
 
     @Override

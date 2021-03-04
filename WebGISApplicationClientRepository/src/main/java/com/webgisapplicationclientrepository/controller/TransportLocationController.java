@@ -96,7 +96,6 @@ public class TransportLocationController {
                     links = @Link(name = "NONE")),
             deprecated = false)
     public TransportInstitution getBusStationLocationById(@PathVariable("id") Long id){
-        System.out.println("ID : " + id);
         return transportInstitutionService.getBusStationLocationById(id);
     }
 }

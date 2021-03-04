@@ -1,5 +1,7 @@
 package com.webgisapplicationclientrepository.service.implementation;
 
+import com.webgisapplicationclientrepository.exceptions.NotAllowedException;
+import com.webgisapplicationclientrepository.exceptions.NotFoundException;
 import com.webgisapplicationclientrepository.model.MedicalInstitution;
 import com.webgisapplicationclientrepository.repository.MedicalInstitutionRepository;
 import com.webgisapplicationclientrepository.service.MedicalInstitutionService;
@@ -23,15 +25,19 @@ public class MedicalInstitutionServiceImplementation implements MedicalInstituti
     @Override
     public List<MedicalInstitution> getPreferredMedicalLocations(String code) {
 
-        if(code.equalsIgnoreCase("hospital")){
+        code = code.toLowerCase();
+        switch (code){
+            case "hospital":{
+                return medicalInstitutionRepository.getHospitalLocations();
+            }
+            case "pharmacy":{
+                return medicalInstitutionRepository.getPharmacyLocations();
+            }
 
-            return medicalInstitutionRepository.getHospitalLocations();
-
-        } else if(code.equalsIgnoreCase("pharmacy")){
-
-            return medicalInstitutionRepository.getPharmacyLocations();
+            default:{
+                throw new NotAllowedException();
+            }
         }
-        return null;
     }
 
     @Override
@@ -47,14 +53,25 @@ public class MedicalInstitutionServiceImplementation implements MedicalInstituti
         String newCode = code.toLowerCase();
         switch (newCode){
             case "hospital":{
-                return medicalInstitutionRepository.getHospitalByName(name);
+                MedicalInstitution medicalInstitution =
+                        medicalInstitutionRepository.getHospitalByName(name);
+                if(medicalInstitution == null){
+                    throw new NotFoundException();
+                } else {
+                    return medicalInstitution;
+                }
             }
             case "pharmacy":{
-                return medicalInstitutionRepository.getPharmacyByName(name);
+                MedicalInstitution medicalInstitution =
+                        medicalInstitutionRepository.getPharmacyByName(name);
+                if(medicalInstitution == null){
+                    throw new NotFoundException();
+                } else {
+                    return medicalInstitution;
+                }
             }
             default: {
-                return null;
-                //TODO exception
+                throw new NotAllowedException();
             }
         }
     }
@@ -64,14 +81,25 @@ public class MedicalInstitutionServiceImplementation implements MedicalInstituti
         String newCode = code.toLowerCase();
         switch (newCode){
             case "hospital":{
-                return medicalInstitutionRepository.getHospitalById(id);
+                MedicalInstitution medicalInstitution =
+                        medicalInstitutionRepository.getHospitalById(id);
+                if(medicalInstitution == null){
+                    throw new NotFoundException();
+                } else {
+                    return medicalInstitution;
+                }
             }
             case "pharmacy":{
-                return medicalInstitutionRepository.getPharmacyById(id);
+                MedicalInstitution medicalInstitution =
+                        medicalInstitutionRepository.getPharmacyById(id);
+                if(medicalInstitution == null){
+                    throw new NotFoundException();
+                } else {
+                    return medicalInstitution;
+                }
             }
             default:{
-                return null;
-                //TODO exception
+                throw new NotFoundException();
             }
         }
     }

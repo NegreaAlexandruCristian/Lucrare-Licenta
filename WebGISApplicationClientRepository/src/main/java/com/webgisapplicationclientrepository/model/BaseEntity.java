@@ -7,6 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
 @Data
@@ -23,6 +24,7 @@ import java.io.Serializable;
 public class BaseEntity implements Serializable {
 
     @Id
+    @NotNull
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Schema(name = "id",description = "The id of the every POJO given to the web application.")
     private Long id;

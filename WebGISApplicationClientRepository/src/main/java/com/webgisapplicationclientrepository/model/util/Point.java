@@ -2,7 +2,9 @@ package com.webgisapplicationclientrepository.model.util;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.*;
+import org.springframework.format.annotation.NumberFormat;
 
+import javax.validation.constraints.*;
 import java.math.BigDecimal;
 
 @Setter
@@ -25,6 +27,10 @@ import java.math.BigDecimal;
 )
 public class Point{
 
+    @NotNull(message = "The string code may not be null")
+    @NotEmpty(message = "The string code may not be empty")
+    @NotBlank(message = "The string code may not be blank")
+    @Pattern(regexp="^[A-Za-z]*$",message = "Invalid Input")
     @Schema(name = "code",
             description = "The code field that will hold the institution type like : hospital, pharmacy etc.",
             type = "String",
@@ -33,14 +39,17 @@ public class Point{
     )
     private String code;
 
+    @NotNull(message = "The string radius may not be null")
+    @NumberFormat(style = NumberFormat.Style.NUMBER)
     @Schema(name = "radius",
             description = "The radius of the search area.",
-            type = "BigDecimal",
+            type = "Long",
             required = true,
-            example = "45.766134681679894"
+            example = "300"
     )
     private Long radius;
 
+    @NotNull(message = "The string latitude may not be null")
     @Schema(name = "latitude",
             description = "The latitude field that will hold the institution type latitude.",
             type = "BigDecimal",
@@ -49,6 +58,7 @@ public class Point{
     )
     private BigDecimal latitude;
 
+    @NotNull(message = "The string longitude may not be null")
     @Schema(name = "longitude",
             description = "The longitude field that will hold the institution type longitude.",
             type = "BigDecimal",

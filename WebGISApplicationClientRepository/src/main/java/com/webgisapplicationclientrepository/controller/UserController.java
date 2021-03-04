@@ -17,11 +17,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
 @RequestMapping("/user/location")
-// TODO Swagger Documentation
 @Tag(name = "UserController", description = "This controller is used to manipulate data given by the POST method " +
         "calculating things like : distance between 2 points, all locations from a specific zone by a given radius etc.")
 public class UserController {
@@ -68,9 +68,8 @@ public class UserController {
                     content = @Content(schema = @Schema(implementation = ObjectWrapper.class), mediaType = "JSON",
                     examples = @ExampleObject(name = "/user/location/distance"
                             , value = "4.901447742483356")),
-                    links = @Link(name = "NONE")),
-            deprecated = false)
-    public Number calculateDistance(@RequestBody ObjectWrapper objectWrapper){
+                    links = @Link(name = "NONE")))
+    public Number calculateDistance(@Valid @RequestBody ObjectWrapper objectWrapper) {
         return userService.calculateDistance(objectWrapper);
     }
 
@@ -155,9 +154,8 @@ public class UserController {
                                     "    }," +
                                     "...." +
                                     "]")),
-                    links = @Link(name = "NONE")),
-            deprecated = false)
-    public List<Institution> getSpecificLocationsFromZone(@RequestBody Point point){
+                    links = @Link(name = "NONE")))
+    public List<Institution> getSpecificLocationsFromZone(@Valid @RequestBody Point point){
         return userService.getLocationsFromZone(point);
     }
 
@@ -242,9 +240,9 @@ public class UserController {
                                     "        \"longitude\": 21.21894251904905\n" +
                                     "    }," +
                                     "...]")),
-                    links = @Link(name = "NONE")),
-            deprecated = false)
-    public List<Institution> getAllLocationsFromZone(@RequestBody Point point){
+                    links = @Link(name = "NONE")))
+    public List<Institution> getAllLocationsFromZone(@Valid @RequestBody Point point) {
+        System.out.println("AIC");
         return userService.getAllLocationsFromZone(point);
     }
 
@@ -284,10 +282,8 @@ public class UserController {
                                     "    \"latitude\": 45.690420066015456,\n" +
                                     "    \"longitude\": 21.88938388095096\n" +
                                     "}")),
-                    links = @Link(name = "NONE")),
-            deprecated = false)
-    public Institution getShortestLocationFromZone(@RequestBody Point point){
+                    links = @Link(name = "NONE")))
+    public Institution getShortestLocationFromZone(@Valid @RequestBody Point point){
         return userService.getShortestLocationFromZone(point);
     }
-
 }

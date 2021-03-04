@@ -2,10 +2,15 @@ package com.webgisapplicationclientrepository.model;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.*;
+import org.springframework.format.annotation.NumberFormat;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import java.io.Serializable;
 import java.math.BigDecimal;
 
@@ -30,6 +35,10 @@ import java.math.BigDecimal;
 public class MedicalInstitution extends BaseEntity implements Serializable {
 
     @Column(name = "nume")
+    @NotNull(message = "The string name may not be null")
+    @NotEmpty(message = "The string name may not be empty")
+    @NotBlank(message = "The string name may not be blank")
+    @Pattern(regexp="^[A-Za-z]*$",message = "Invalid Input")
     @Schema(name = "name",
             description = "The name field that will hold the medical institution name.",
             type = "String",
@@ -39,6 +48,10 @@ public class MedicalInstitution extends BaseEntity implements Serializable {
     private String name;
 
     @Column(name = "code")
+    @NotNull(message = "The string code may not be null")
+    @NotEmpty(message = "The string code may not be empty")
+    @NotBlank(message = "The string code may not be blank")
+    @Pattern(regexp="^[A-Za-z]*$",message = "Invalid Input")
     @Schema(name = "code",
             description = "The code field that will hold the medical institution type like : hospital, pharmacy etc.",
             type = "String",
@@ -48,6 +61,7 @@ public class MedicalInstitution extends BaseEntity implements Serializable {
     private String code;
 
     @Column(name = "latitude")
+    @NotNull(message = "The string latitude may not be null")
     @Schema(name = "latitude",
             description = "The latitude field that will hold the medical institution latitude.",
             type = "BigDecimal",
@@ -57,6 +71,7 @@ public class MedicalInstitution extends BaseEntity implements Serializable {
     private BigDecimal latitude;
 
     @Column(name = "longitude")
+    @NotNull(message = "The string longitude may not be null")
     @Schema(name = "longitude",
             description = "The longitude field that will hold the medical institution longitude.",
             type = "BigDecimal",

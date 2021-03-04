@@ -1,7 +1,6 @@
 package com.webgisapplicationclientrepository.controller;
 
 import com.webgisapplicationclientrepository.model.MedicalInstitution;
-import com.webgisapplicationclientrepository.model.PublicInstitution;
 import com.webgisapplicationclientrepository.service.MedicalInstitutionService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;

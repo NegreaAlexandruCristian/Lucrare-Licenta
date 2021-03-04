@@ -3,6 +3,8 @@ package com.webgisapplicationclientrepository.model.util;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.*;
 
+import javax.validation.constraints.NotNull;
+
 @Data
 @Schema(type = "POJO, JSON",
         description = "A POJO that holds two points on the map and because it has the 'implements Serializable'," +
@@ -26,6 +28,7 @@ import lombok.*;
 )
 public class ObjectWrapper{
 
+    @NotNull(message = "The startingDistance can't be null")
     @Schema(description = "The starting point.",
     example = "\"startingDistance\":{\n" +
             "    \"code\": \"user\",\n" +
@@ -34,6 +37,7 @@ public class ObjectWrapper{
             "    }")
     private Point startingDistance;
 
+    @NotNull(message = "The finishDestination can't be null")
     @Schema(description = "The starting point.",
             example = "\"finishDestination\":{\n" +
                     "    \"code\": \"school\",\n" +

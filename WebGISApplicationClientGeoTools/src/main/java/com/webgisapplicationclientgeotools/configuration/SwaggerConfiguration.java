@@ -1,4 +1,4 @@
-package com.webgisapplicationclientrepository.configuration;
+package com.webgisapplicationclientgeotools.configuration;
 
 import io.swagger.v3.oas.models.ExternalDocumentation;
 import io.swagger.v3.oas.models.OpenAPI;
@@ -20,8 +20,10 @@ public class SwaggerConfiguration {
 
         return new OpenAPI()
                 .info(new Info().title("WebGISApplication")
-                        .description("This is the client repository microservice that uses the PostgreSQL database that" +
-                                "has the PostGIS extension to calculate multiple calculations that require advance formulas.")
+                        .description("This is the GeoTools repository microservice that doesn't use the PostgreSQL database that" +
+                                "has the PostGIS extension to calculate multiple calculations that require advance formulas." +
+                                "But uses the GeoTools plugin to calculate the same things as the PostGIS extension from the" +
+                                " PostgreSQL.")
                         .version("v1.0.0")
                         .contact(contact)
                         .license(new License().name("OpenAPI 3 & Spring Boot").url("http://springdoc.org")))

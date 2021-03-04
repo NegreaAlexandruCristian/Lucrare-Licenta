@@ -1,5 +1,7 @@
 package com.webgisapplicationclientrepository.service.implementation;
 
+import com.webgisapplicationclientrepository.exceptions.NotAllowedException;
+import com.webgisapplicationclientrepository.exceptions.NotFoundException;
 import com.webgisapplicationclientrepository.model.PublicInstitution;
 import com.webgisapplicationclientrepository.repository.PublicInstitutionRepository;
 import com.webgisapplicationclientrepository.service.PublicInstitutionService;
@@ -32,16 +34,19 @@ public class PublicInstitutionServiceImplementation implements PublicInstitution
     @Override
     public List<PublicInstitution> getPreferredPublicLocations(String code) {
 
-        if(code.equalsIgnoreCase("university")){
+        code = code.toLowerCase();
+        switch (code) {
+            case "university": {
+                return publicInstitutionRepository.getUniversityLocations();
+            }
+            case "school": {
+                return publicInstitutionRepository.getSchoolLocations();
+            }
 
-            return publicInstitutionRepository.getUniversityLocations();
-
-        } else if(code.equalsIgnoreCase("school")){
-
-            return publicInstitutionRepository.getSchoolLocations();
+            default: {
+                throw new NotAllowedException();
+            }
         }
-
-        return null;
     }
 
     @Override
@@ -49,14 +54,25 @@ public class PublicInstitutionServiceImplementation implements PublicInstitution
         String newCode = code.toLowerCase();
         switch (newCode){
             case "school":{
-                return publicInstitutionRepository.getSchoolByName(name);
+                PublicInstitution publicInstitution =
+                        publicInstitutionRepository.getSchoolByName(name);
+                if(publicInstitution == null){
+                    throw new NotFoundException();
+                } else {
+                    return publicInstitution;
+                }
             }
             case "university":{
-                return publicInstitutionRepository.getUniversityByName(name);
+                PublicInstitution publicInstitution =
+                        publicInstitutionRepository.getUniversityByName(name);
+                if(publicInstitution == null){
+                    throw new NotFoundException();
+                } else {
+                    return publicInstitution;
+                }
             }
             default: {
-                return null;
-                //TODO exception
+                throw new NotAllowedException();
             }
         }
     }
@@ -66,14 +82,25 @@ public class PublicInstitutionServiceImplementation implements PublicInstitution
         String newCode = code.toLowerCase();
         switch (newCode){
             case "school":{
-                return publicInstitutionRepository.getSchoolById(id);
+                PublicInstitution publicInstitution =
+                        publicInstitutionRepository.getSchoolById(id);
+                if(publicInstitution == null){
+                    throw new NotFoundException();
+                } else {
+                    return publicInstitution;
+                }
             }
             case "university":{
-                return publicInstitutionRepository.getUniversityById(id);
+                PublicInstitution publicInstitution =
+                        publicInstitutionRepository.getUniversityById(id);
+                if(publicInstitution == null){
+                    throw new NotFoundException();
+                } else {
+                    return publicInstitution;
+                }
             }
             default: {
-                return null;
-                //TODO exception
+                throw new NotAllowedException();
             }
         }
     }

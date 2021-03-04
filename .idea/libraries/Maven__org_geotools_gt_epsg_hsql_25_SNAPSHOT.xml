@@ -1,13 +1,13 @@
 <component name="libraryTable">
   <library name="Maven: org.geotools:gt-epsg-hsql:25-SNAPSHOT">
     <CLASSES>
-      <root url="jar://$MAVEN_REPOSITORY$/org/geotools/gt-epsg-hsql/25-SNAPSHOT/gt-epsg-hsql-25-20210223.085441-124.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/org/geotools/gt-epsg-hsql/25-SNAPSHOT/gt-epsg-hsql-25-20210302.055424-135.jar!/" />
     </CLASSES>
     <JAVADOC>
-      <root url="jar://$MAVEN_REPOSITORY$/org/geotools/gt-epsg-hsql/25-SNAPSHOT/gt-epsg-hsql-25-20210223.085441-124-javadoc.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/org/geotools/gt-epsg-hsql/25-SNAPSHOT/gt-epsg-hsql-25-20210302.055424-135-javadoc.jar!/" />
     </JAVADOC>
     <SOURCES>
-      <root url="jar://$MAVEN_REPOSITORY$/org/geotools/gt-epsg-hsql/25-SNAPSHOT/gt-epsg-hsql-25-20210223.085441-124-sources.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/org/geotools/gt-epsg-hsql/25-SNAPSHOT/gt-epsg-hsql-25-20210302.055424-135-sources.jar!/" />
     </SOURCES>
   </library>
 </component>

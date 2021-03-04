@@ -1,6 +1,5 @@
 package com.webgisapplicationclientrepository.controller;
 
-
 import com.webgisapplicationclientrepository.model.PublicInstitution;
 import com.webgisapplicationclientrepository.service.PublicInstitutionService;
 import io.swagger.v3.oas.annotations.Operation;
