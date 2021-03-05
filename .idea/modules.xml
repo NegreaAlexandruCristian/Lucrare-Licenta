@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/Lucrare-Licenta.iml" filepath="$PROJECT_DIR$/.idea/Lucrare-Licenta.iml" />
+      <module fileurl="file://$PROJECT_DIR$/WebGISApplicationFeignClientGeoTools/WebGISApplicationFeignClientGeoTools.iml" filepath="$PROJECT_DIR$/WebGISApplicationFeignClientGeoTools/WebGISApplicationFeignClientGeoTools.iml" />
       <module fileurl="file://$PROJECT_DIR$/WebGISApplicationClientGeoTools/webgisapplicationclientgeotools.iml" filepath="$PROJECT_DIR$/WebGISApplicationClientGeoTools/webgisapplicationclientgeotools.iml" />
       <module fileurl="file://$PROJECT_DIR$/WebGISApplicationClientRepository/webgisapplicationclientrepository.iml" filepath="$PROJECT_DIR$/WebGISApplicationClientRepository/webgisapplicationclientrepository.iml" />
       <module fileurl="file://$PROJECT_DIR$/WebGISApplicationFeignClient/webgisapplicationfeignclient.iml" filepath="$PROJECT_DIR$/WebGISApplicationFeignClient/webgisapplicationfeignclient.iml" />

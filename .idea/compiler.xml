@@ -12,18 +12,21 @@
         <module name="webgisapplicationzuulproxy" />
         <module name="webgisapplicationclientrepository" />
         <module name="webgisapplicationfeignclient" />
+        <module name="WebGISApplicationFeignClientGeoTools" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="webgisapplicationclientgeotools" target="11" />
       <module name="webgisapplicationclientrepository" target="11" />
       <module name="webgisapplicationfeignclient" target="11" />
+      <module name="WebGISApplicationFeignClientGeoTools" target="11" />
       <module name="webgisapplicationserver" target="11" />
       <module name="webgisapplicationzuulproxy" target="11" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="WebGISApplicationFeignClientGeoTools" options="-parameters" />
       <module name="webgisapplicationclientgeotools" options="-parameters" />
       <module name="webgisapplicationclientrepository" options="-parameters" />
       <module name="webgisapplicationfeignclient" options="-parameters" />

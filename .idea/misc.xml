@@ -8,6 +8,7 @@
         <option value="$PROJECT_DIR$/WebGISApplicationFeignClient/pom.xml" />
         <option value="$PROJECT_DIR$/WebGISApplicationClientGeoTools/pom.xml" />
         <option value="$PROJECT_DIR$/WebGISApplicationClientRepository/pom.xml" />
+        <option value="$PROJECT_DIR$/WebGISApplicationFeignClientGeoTools/pom.xml" />
       </list>
     </option>
   </component>
