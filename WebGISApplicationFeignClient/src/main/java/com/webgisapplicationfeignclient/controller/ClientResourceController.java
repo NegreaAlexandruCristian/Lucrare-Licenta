@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -93,22 +94,22 @@ public class ClientResourceController {
     }
 
     @PostMapping("/user/location/distance")
-    public Number calculateDistance(@RequestBody ObjectWrapper objectWrapper){
+    public Number calculateDistance(@Valid @RequestBody ObjectWrapper objectWrapper){
         return clientServiceFeign.calculateDistance(objectWrapper);
     }
 
     @PostMapping("/user/location/zone")
-    public List<Institution> getLocationsFromZone(@RequestBody Point point){
+    public List<Institution> getLocationsFromZone(@Valid @RequestBody Point point){
         return clientServiceFeign.getLocationsFromZone(point);
     }
 
     @PostMapping("/user/location/all")
-    public List<Institution> getAllLocationsFromZone(@RequestBody Point point){
+    public List<Institution> getAllLocationsFromZone(@Valid @RequestBody Point point){
         return clientServiceFeign.getAllLocationsFromZone(point);
     }
 
     @PostMapping("/user/location/shortest")
-    Institution getShortestLocationFromZone(@RequestBody Point point){
+    Institution getShortestLocationFromZone(@Valid @RequestBody Point point){
         return clientServiceFeign.getShortestLocationFromZone(point);
     }
 }

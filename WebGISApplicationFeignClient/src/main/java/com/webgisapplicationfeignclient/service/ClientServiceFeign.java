@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @FeignClient(name = "web-gis-client-repository")
@@ -58,15 +59,15 @@ public interface ClientServiceFeign {
     TransportInstitution getBusStationLocationById(@PathVariable("id") Long id);
 
     @PostMapping("/user/location/distance")
-    Number calculateDistance(@RequestBody ObjectWrapper objectWrapper);
+    Number calculateDistance(@Valid @RequestBody ObjectWrapper objectWrapper);
 
     @PostMapping("/user/location/zone")
-    List<Institution> getLocationsFromZone(@RequestBody Point point);
+    List<Institution> getLocationsFromZone(@Valid @RequestBody Point point);
 
     @PostMapping("/user/location/all")
-    List<Institution> getAllLocationsFromZone(@RequestBody Point point);
+    List<Institution> getAllLocationsFromZone(@Valid @RequestBody Point point);
 
     @PostMapping("/user/location/shortest")
-    Institution getShortestLocationFromZone(@RequestBody Point point);
+    Institution getShortestLocationFromZone(@Valid @RequestBody Point point);
 
 }
