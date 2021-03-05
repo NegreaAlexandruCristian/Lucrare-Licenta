@@ -1,3 +1,4 @@
+#Application
 server:
   port: 8662
 
@@ -5,6 +6,7 @@ spring:
   application:
     name: web-gis-application-zuul-proxy
 
+#Eureka
 eureka:
   client:
     registerWithEureka: true
@@ -14,12 +16,17 @@ eureka:
   instance:
     hostname: localhost
 
+#Zuul Proxy
 zuul:
   host:
     connect-timeout-millis: 5000000
     socket-timeout-millis: 5000000
   ignoredServices: '*'
   routes:
+    geo-tools-resource-service:
+      path: /api/geo-tools/**
+      serviceId: web-gis-application-feign-client-geo-tools
+      stripPrefix: true
     resource-service:
       path: /api/**
       serviceId: web-gis-application-feign-client
@@ -28,4 +35,7 @@ zuul:
       path: /repository/**
       serviceId: web-gis-client-repository
       stripPrefix: true
-
+    geo-tools-user-service:
+      path: /geo-tools/**
+      serviceId: web-gis-client-geo-tools
+      stripPrefix: true
