@@ -8,7 +8,6 @@ import com.webgisapplicationfeignclient.model.util.ObjectWrapper;
 import com.webgisapplicationfeignclient.model.util.Point;
 import com.webgisapplicationfeignclient.service.ClientServiceFeign;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
