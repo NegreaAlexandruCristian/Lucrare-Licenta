@@ -1,7 +1,8 @@
 package com.webgisapplicationclientrepository.model;
 
 import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.*;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 import org.springframework.format.annotation.NumberFormat;
 
 import javax.persistence.Column;
@@ -62,6 +63,7 @@ public class MedicalInstitution extends BaseEntity implements Serializable {
 
     @Column(name = "latitude")
     @NotNull(message = "The string latitude may not be null")
+    @NumberFormat(style = NumberFormat.Style.NUMBER)
     @Schema(name = "latitude",
             description = "The latitude field that will hold the medical institution latitude.",
             type = "BigDecimal",
@@ -72,6 +74,7 @@ public class MedicalInstitution extends BaseEntity implements Serializable {
 
     @Column(name = "longitude")
     @NotNull(message = "The string longitude may not be null")
+    @NumberFormat(style = NumberFormat.Style.NUMBER)
     @Schema(name = "longitude",
             description = "The longitude field that will hold the medical institution longitude.",
             type = "BigDecimal",

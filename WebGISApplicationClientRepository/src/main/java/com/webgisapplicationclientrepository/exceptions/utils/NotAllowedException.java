@@ -1,4 +1,4 @@
-package com.webgisapplicationclientrepository.exceptions;
+package com.webgisapplicationclientrepository.exceptions.utils;
 
 public class NotAllowedException extends RuntimeException {
     public NotAllowedException(){

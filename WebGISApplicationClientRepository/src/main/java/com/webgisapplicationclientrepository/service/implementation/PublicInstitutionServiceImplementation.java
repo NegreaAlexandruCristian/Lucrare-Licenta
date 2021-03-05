@@ -1,14 +1,13 @@
 package com.webgisapplicationclientrepository.service.implementation;
 
-import com.webgisapplicationclientrepository.exceptions.NotAllowedException;
-import com.webgisapplicationclientrepository.exceptions.NotFoundException;
+import com.webgisapplicationclientrepository.exceptions.utils.NotAllowedException;
+import com.webgisapplicationclientrepository.exceptions.utils.NotFoundException;
 import com.webgisapplicationclientrepository.model.PublicInstitution;
 import com.webgisapplicationclientrepository.repository.PublicInstitutionRepository;
 import com.webgisapplicationclientrepository.service.PublicInstitutionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;

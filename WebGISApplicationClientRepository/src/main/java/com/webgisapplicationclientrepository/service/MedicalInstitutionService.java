@@ -1,7 +1,6 @@
 package com.webgisapplicationclientrepository.service;
 
 import com.webgisapplicationclientrepository.model.MedicalInstitution;
-import com.webgisapplicationclientrepository.model.PublicInstitution;
 
 import java.util.List;
 

@@ -35,11 +35,10 @@ public class MedicalLocationController {
     @Operation(summary = "Retrieves all medical locations from a city.",
             description = "This method is of type GET which you can access on the endpoint of /api/medical/locations/get" +
                     "that will return every medical institution available in the database.",
-                    parameters = @Parameter(name = "NONE", description = "None needed", required = false),
+                    parameters = @Parameter(name = "NONE", description = "None needed"),
                     responses = @ApiResponse(responseCode = "OK - 200", description = "List of medical institutions",
                             content = @Content(array = @ArraySchema(schema = @Schema(implementation = MedicalInstitution.class)), mediaType = "JSON"),
-                    links = @Link(name = "NONE")),
-                    deprecated = false)
+                    links = @Link(name = "NONE")))
     public List<MedicalInstitution> getAllMedicalLocations(){
         return medicalInstitutionService.getAllMedicalLocations();
     }
@@ -56,8 +55,7 @@ public class MedicalLocationController {
             in = ParameterIn.HEADER),
             responses = @ApiResponse(responseCode = "OK - 200", description = "List of a type of medical institution",
                     content = @Content(array = @ArraySchema(schema = @Schema(implementation = MedicalInstitution.class)), mediaType = "JSON"),
-                    links = @Link(name = "NONE")),
-            deprecated = false)
+                    links = @Link(name = "NONE")))
     public List<MedicalInstitution> getPreferredMedicalLocations(@PathVariable("type") String code){
         return medicalInstitutionService.getPreferredMedicalLocations(code);
     }
@@ -78,8 +76,7 @@ public class MedicalLocationController {
                                   in = ParameterIn.HEADER)},
             responses = @ApiResponse(responseCode = "OK - 200", description = "A medical institution",
                     content = @Content(schema = @Schema(implementation = MedicalInstitution.class), mediaType = "JSON"),
-                    links = @Link(name = "NONE")),
-            deprecated = false)
+                    links = @Link(name = "NONE")))
     public MedicalInstitution getMedicalInstitutionLocationByName(@PathVariable(name = "code") String code,
                                                         @PathVariable(name = "name") String name){
         return medicalInstitutionService.getMedicalInstitutionByName(code,name);
@@ -101,8 +98,7 @@ public class MedicalLocationController {
                             in = ParameterIn.HEADER)},
             responses = @ApiResponse(responseCode = "OK - 200", description = "A medical institution",
                     content = @Content(schema = @Schema(implementation = MedicalInstitution.class), mediaType = "JSON"),
-                    links = @Link(name = "NONE")),
-            deprecated = false)
+                    links = @Link(name = "NONE")))
     public MedicalInstitution getMedicalInstitutionLocationById(@PathVariable(name = "code") String code,
                                                                 @PathVariable("id") Long id){
         return medicalInstitutionService.getMedicalInstitutionById(code,id);

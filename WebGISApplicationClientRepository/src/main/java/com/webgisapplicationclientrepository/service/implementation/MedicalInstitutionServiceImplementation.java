@@ -1,7 +1,7 @@
 package com.webgisapplicationclientrepository.service.implementation;
 
-import com.webgisapplicationclientrepository.exceptions.NotAllowedException;
-import com.webgisapplicationclientrepository.exceptions.NotFoundException;
+import com.webgisapplicationclientrepository.exceptions.utils.NotAllowedException;
+import com.webgisapplicationclientrepository.exceptions.utils.NotFoundException;
 import com.webgisapplicationclientrepository.model.MedicalInstitution;
 import com.webgisapplicationclientrepository.repository.MedicalInstitutionRepository;
 import com.webgisapplicationclientrepository.service.MedicalInstitutionService;

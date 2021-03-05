@@ -35,11 +35,10 @@ public class PublicLocationController {
     @Operation(summary = "Retrieves all public locations from a city.",
             description = "This method is of type GET which you can access on the endpoint of /api/public/locations/get" +
                     " that will return every public institution available in the database.",
-            parameters = @Parameter(name = "NONE", description = "None needed", required = false),
+            parameters = @Parameter(name = "NONE", description = "None needed"),
             responses = @ApiResponse(responseCode = "OK - 200", description = "List of public institutions",
                     content = @Content(array = @ArraySchema(schema = @Schema(implementation = PublicInstitution.class)), mediaType = "JSON"),
-                    links = @Link(name = "NONE")),
-            deprecated = false)
+                    links = @Link(name = "NONE")))
     public List<PublicInstitution> getAllPublicLocations(){
         return publicInstitutionService.getAllPublicLocations();
     }
@@ -56,8 +55,7 @@ public class PublicLocationController {
                     in = ParameterIn.HEADER),
             responses = @ApiResponse(responseCode = "OK - 200", description = "List of a type of public institution",
                     content = @Content(array = @ArraySchema(schema = @Schema(implementation = PublicInstitution.class)), mediaType = "JSON"),
-                    links = @Link(name = "NONE")),
-            deprecated = false)
+                    links = @Link(name = "NONE")))
     public List<PublicInstitution> getPreferredPublicLocations(@PathVariable("type") String code){
         return publicInstitutionService.getPreferredPublicLocations(code);
     }
@@ -78,8 +76,7 @@ public class PublicLocationController {
                             in = ParameterIn.HEADER)},
             responses = @ApiResponse(responseCode = "OK - 200", description = "A public institution",
                     content = @Content(schema = @Schema(implementation = PublicInstitution.class), mediaType = "JSON"),
-                    links = @Link(name = "NONE")),
-            deprecated = false)
+                    links = @Link(name = "NONE")))
     public PublicInstitution getPublicInstitutionLocationByName(@PathVariable("code") String code,
                                                      @PathVariable("name") String name){
         return publicInstitutionService.getPublicInstitutionByName(code, name);
@@ -101,8 +98,7 @@ public class PublicLocationController {
                             in = ParameterIn.HEADER)},
             responses = @ApiResponse(responseCode = "OK - 200", description = "A public institution",
                     content = @Content(schema = @Schema(implementation = PublicInstitution.class), mediaType = "JSON"),
-                    links = @Link(name = "NONE")),
-            deprecated = false)
+                    links = @Link(name = "NONE")))
     public PublicInstitution getPublicInstitutionLocationById(@PathVariable("code") String code,
                                                    @PathVariable("id") Long id){
         return publicInstitutionService.getPublicInstitutionById(code, id);

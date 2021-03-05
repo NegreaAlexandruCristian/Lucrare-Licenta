@@ -1,6 +1,6 @@
 package com.webgisapplicationclientrepository.service.implementation;
 
-import com.webgisapplicationclientrepository.exceptions.ConstraintViolationExceptionCustom;
+import com.webgisapplicationclientrepository.exceptions.utils.ConstraintViolationExceptionCustom;
 import com.webgisapplicationclientrepository.model.util.Institution;
 import com.webgisapplicationclientrepository.model.util.ObjectWrapper;
 import com.webgisapplicationclientrepository.model.util.Point;
@@ -54,10 +54,7 @@ public class UserServiceImplementation implements UserService {
     @Override
     public List<Institution> getAllLocationsFromZone(Point point) {
         List<Institution> institutionList = new ArrayList<>();
-        System.out.println("HERE");
         for(String tableName: tableNames){
-            System.out.println(userRepository.getLocationsFromZone(point.getLatitude(), point.getLongitude(),
-                    tableName,point.getRadius()));
             institutionList.addAll(userRepository.getLocationsFromZone(point.getLatitude(), point.getLongitude(),
                     tableName,point.getRadius()));
         }

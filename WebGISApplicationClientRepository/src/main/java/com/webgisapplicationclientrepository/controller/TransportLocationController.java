@@ -36,11 +36,10 @@ public class TransportLocationController {
     @Operation(summary = "Retrieves all transport locations from a city.",
             description = "This method is of type GET which you can access on the endpoint of /api/transport/locations/get" +
                     " that will return every transport institution available in the database.",
-            parameters = @Parameter(name = "NONE", description = "None needed", required = false),
+            parameters = @Parameter(name = "NONE", description = "None needed"),
             responses = @ApiResponse(responseCode = "OK - 200", description = "List of transport institutions",
                     content = @Content(array = @ArraySchema(schema = @Schema(implementation = TransportInstitution.class)), mediaType = "JSON"),
-                    links = @Link(name = "NONE")),
-            deprecated = false)
+                    links = @Link(name = "NONE")))
     public List<TransportInstitution> getAllTransportLocations(){
         return transportInstitutionService.getAllTransportLocations();
     }
@@ -57,8 +56,7 @@ public class TransportLocationController {
                     in = ParameterIn.HEADER),
             responses = @ApiResponse(responseCode = "OK - 200", description = "List of a type of transport institution",
                     content = @Content(array = @ArraySchema(schema = @Schema(implementation = TransportInstitution.class)), mediaType = "JSON"),
-                    links = @Link(name = "NONE")),
-            deprecated = false)
+                    links = @Link(name = "NONE")))
     public List<TransportInstitution> getPreferredTransportLocations(@PathVariable("type") String code){
         return transportInstitutionService.getPreferredTransportLocations(code);
     }
@@ -75,8 +73,7 @@ public class TransportLocationController {
                             in = ParameterIn.HEADER)},
             responses = @ApiResponse(responseCode = "OK - 200", description = "A transport institution",
                     content = @Content(schema = @Schema(implementation = TransportInstitution.class), mediaType = "JSON"),
-                    links = @Link(name = "NONE")),
-            deprecated = false)
+                    links = @Link(name = "NONE")))
     public TransportInstitution getBusStationLocationByName(@PathVariable("name") String name){
         return transportInstitutionService.getBusStationLocationByName(name);
     }
@@ -93,8 +90,7 @@ public class TransportLocationController {
                             in = ParameterIn.HEADER)},
             responses = @ApiResponse(responseCode = "OK - 200", description = "A transport institution",
                     content = @Content(schema = @Schema(implementation = TransportInstitution.class), mediaType = "JSON"),
-                    links = @Link(name = "NONE")),
-            deprecated = false)
+                    links = @Link(name = "NONE")))
     public TransportInstitution getBusStationLocationById(@PathVariable("id") Long id){
         return transportInstitutionService.getBusStationLocationById(id);
     }

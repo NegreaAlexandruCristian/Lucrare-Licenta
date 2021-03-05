@@ -1,6 +1,9 @@
 package com.webgisapplicationclientrepository.exceptions;
 
 import com.webgisapplicationclientrepository.exceptions.utils.APIError;
+import com.webgisapplicationclientrepository.exceptions.utils.ConstraintViolationExceptionCustom;
+import com.webgisapplicationclientrepository.exceptions.utils.NotAllowedException;
+import com.webgisapplicationclientrepository.exceptions.utils.NotFoundException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

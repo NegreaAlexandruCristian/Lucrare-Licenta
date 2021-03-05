@@ -242,7 +242,6 @@ public class UserController {
                                     "...]")),
                     links = @Link(name = "NONE")))
     public List<Institution> getAllLocationsFromZone(@Valid @RequestBody Point point) {
-        System.out.println("AIC");
         return userService.getAllLocationsFromZone(point);
     }
 

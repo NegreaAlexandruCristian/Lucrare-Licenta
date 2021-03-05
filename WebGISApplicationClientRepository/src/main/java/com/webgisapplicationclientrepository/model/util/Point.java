@@ -50,6 +50,7 @@ public class Point{
     private Long radius;
 
     @NotNull(message = "The string latitude may not be null")
+    @NumberFormat(style = NumberFormat.Style.NUMBER)
     @Schema(name = "latitude",
             description = "The latitude field that will hold the institution type latitude.",
             type = "BigDecimal",
@@ -59,6 +60,7 @@ public class Point{
     private BigDecimal latitude;
 
     @NotNull(message = "The string longitude may not be null")
+    @NumberFormat(style = NumberFormat.Style.NUMBER)
     @Schema(name = "longitude",
             description = "The longitude field that will hold the institution type longitude.",
             type = "BigDecimal",

@@ -48,7 +48,6 @@ public class Institution extends BaseEntity implements Serializable {
     @NotEmpty(message = "The string code may not be empty")
     @NotBlank(message = "The string code may not be blank")
     @Pattern(regexp="^[A-Za-z]*$",message = "Invalid Input")
-    @Pattern(regexp="^[A-Za-z]*$",message = "Invalid Input")
     @Schema(name = "code",
             description = "The code field that will hold the institution type like : hospital, pharmacy, school etc.",
             type = "String",
@@ -70,6 +69,7 @@ public class Institution extends BaseEntity implements Serializable {
 
     @Column(name = "longitude")
     @NotNull(message = "The string longitude may not be null")
+    @NumberFormat(style = NumberFormat.Style.NUMBER)
     @Schema(name = "longitude",
             description = "The longitude field that will hold the institution longitude.",
             type = "BigDecimal",

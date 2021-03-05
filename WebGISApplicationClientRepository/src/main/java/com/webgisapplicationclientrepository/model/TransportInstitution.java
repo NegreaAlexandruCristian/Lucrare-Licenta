@@ -62,6 +62,7 @@ public class TransportInstitution extends BaseEntity implements Serializable{
 
     @Column(name = "latitude")
     @NotNull(message = "The string latitude may not be null")
+    @NumberFormat(style = NumberFormat.Style.NUMBER)
     @Schema(name = "latitude",
             description = "The latitude field that will hold the transport institution latitude.",
             type = "BigDecimal",
@@ -72,6 +73,7 @@ public class TransportInstitution extends BaseEntity implements Serializable{
 
     @Column(name = "longitude")
     @NotNull(message = "The string longitude may not be null")
+    @NumberFormat(style = NumberFormat.Style.NUMBER)
     @Schema(name = "longitude",
             description = "The longitude field that will hold the transport institution longitude.",
             type = "BigDecimal",
