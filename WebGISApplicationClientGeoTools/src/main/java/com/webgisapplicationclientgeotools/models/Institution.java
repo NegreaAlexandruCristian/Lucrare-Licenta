@@ -1,15 +1,11 @@
 package com.webgisapplicationclientgeotools.models;
 
-import lombok.*;
+import lombok.Data;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
 
-@Setter
-@Getter
-@ToString
-@NoArgsConstructor
-@AllArgsConstructor
+@Data
 public class Institution implements Serializable {
 
     private String name;

@@ -24,14 +24,16 @@ public class UserController {
         this.userService = userService;
     }
 
+    @ResponseBody
     @PostMapping("/distance")
-    @ResponseStatus(value = HttpStatus.OK)
-    public ResponseEntity<BigDecimal> calculateDistanceBetweenTwoPoints(@RequestBody ObjectWrapper objectWrapper){
-        return new ResponseEntity<>(userService.calculateDistanceBetweenTwoPoints(objectWrapper), HttpStatus.OK);
+    @ResponseStatus(value = HttpStatus.OK, code = HttpStatus.OK)
+    public BigDecimal calculateDistanceBetweenTwoPoints(@RequestBody ObjectWrapper objectWrapper){
+        return userService.calculateDistanceBetweenTwoPoints(objectWrapper);
     }
 
+    @ResponseBody
     @PostMapping("/zone")
-    @ResponseStatus(value = HttpStatus.OK)
+    @ResponseStatus(value = HttpStatus.OK, code = HttpStatus.OK)
     public List<Institution> getSpecificLocationsFromZone(@RequestBody Point point){
         return userService.getLocationsFromZone(point);
     }

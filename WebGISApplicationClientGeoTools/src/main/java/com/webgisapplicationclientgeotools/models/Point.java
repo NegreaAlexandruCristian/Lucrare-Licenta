@@ -1,15 +1,8 @@
 package com.webgisapplicationclientgeotools.models;
 
-import lombok.*;
-import org.locationtech.jts.geom.Geometry;
+import lombok.Data;
 
-import java.math.BigDecimal;
-
-@Setter
-@Getter
-@ToString
-@NoArgsConstructor
-@AllArgsConstructor
+@Data
 public class Point{
 
     private String code;
