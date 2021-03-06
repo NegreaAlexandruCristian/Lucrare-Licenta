@@ -5,12 +5,9 @@ import lombok.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
 
-@Getter
-@Setter
-@ToString
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode(callSuper = false)
 public class PublicInstitution implements Serializable {
 
     private Long id;
