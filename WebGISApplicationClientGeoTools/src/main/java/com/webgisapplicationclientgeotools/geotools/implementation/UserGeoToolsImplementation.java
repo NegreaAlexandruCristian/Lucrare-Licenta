@@ -27,7 +27,6 @@ import tech.units.indriya.quantity.Quantities;
 
 import javax.measure.Quantity;
 import javax.measure.Unit;
-import javax.measure.UnitConverter;
 import javax.measure.quantity.Length;
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -109,9 +108,27 @@ public class UserGeoToolsImplementation implements UserGeoTools {
         return retGeom;
     }
 
+    private static String getLocationType(String code){
+        code = code.toLowerCase();
+        switch (code){
+            case ("hospital"):
+            case ("pharmacy"):
+                return "medical";
+            case ("school"):
+            case ("university"):
+                return "public";
+            case ("bus-stop"):
+                return "transport";
+            default:
+                //TODO Implement exception handling
+                return null;
+        }
+    }
+
     private static List<Institution> getLocations(String locationType)
     {
-        final String uri = "http://localhost:8183/medical/locations/get/" + locationType;
+        String type = getLocationType(locationType);
+        final String uri = "http://localhost:8183/" + type + "/locations/get/" + locationType;
 
         RestTemplate restTemplate = new RestTemplate();
         ResponseEntity<List<Institution>> response = restTemplate.exchange(
@@ -132,7 +149,7 @@ public class UserGeoToolsImplementation implements UserGeoTools {
         Geometry geometry = bufferPoint(dist, DefaultGeographicCRS.WGS84, p);
 
         List<Institution> list = getLocations(point.getCode());
-        org.locationtech.jts.geom.Point temp = null;
+        org.locationtech.jts.geom.Point temp;
         List<Institution> okList = new ArrayList<>();
         for (Institution institution : list) {
             double latitude = institution.getLatitude().doubleValue();
@@ -143,5 +160,30 @@ public class UserGeoToolsImplementation implements UserGeoTools {
             }
         }
         return okList;
+    }
+
+    @Override
+    public Institution getShortestLocationFromZone(Point point) {
+        List<Institution> institutionList = getLocations(point.getCode());
+        Institution smallestDistance = null;
+        BigDecimal minimum = BigDecimal.valueOf(99999999999L);
+        for(Institution institution : institutionList){
+            Point finishingPoint = Point.builder()
+                    .code("")
+                    .radius(0L)
+                    .latitude(institution.getLatitude().doubleValue())
+                    .longitude(institution.getLongitude().doubleValue())
+                    .build();
+            ObjectWrapper objectWrapper = ObjectWrapper.builder()
+                    .startingDistance(point)
+                    .finishDestination(finishingPoint)
+                    .build();
+            BigDecimal value = calculateDistanceBetweenTwoPoints(objectWrapper);
+            if(minimum.compareTo(value) > 0){
+                minimum = value;
+                smallestDistance = institution;
+            }
+        }
+        return smallestDistance;
     }
 }

@@ -22,15 +22,24 @@ public class ClientGeoToolsResourceController {
         this.clientGeoToolsServiceFeign = clientGeoToolsServiceFeign;
     }
 
+    @ResponseBody
     @PostMapping("/user/location/distance")
     @ResponseStatus(value = HttpStatus.OK, code = HttpStatus.OK)
     BigDecimal calculateDistanceBetweenTwoPoints(@RequestBody ObjectWrapper objectWrapper){
         return clientGeoToolsServiceFeign.calculateDistanceBetweenTwoPoints(objectWrapper);
     }
 
+    @ResponseBody
     @PostMapping("/user/location/zone")
     @ResponseStatus(value = HttpStatus.OK, code = HttpStatus.OK)
     List<Institution> getSpecificLocationsFromZone(@RequestBody Point point){
         return clientGeoToolsServiceFeign.getSpecificLocationsFromZone(point);
+    }
+
+    @ResponseBody
+    @PostMapping("/user/location/shortest")
+    @ResponseStatus(value = HttpStatus.OK, code = HttpStatus.OK)
+    Institution getShortestLocationFromZone(@RequestBody Point point){
+        return clientGeoToolsServiceFeign.getShortestLocationFromZone(point);
     }
 }

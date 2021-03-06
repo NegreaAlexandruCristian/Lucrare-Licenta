@@ -12,4 +12,6 @@ public interface UserGeoTools {
     BigDecimal calculateDistanceBetweenTwoPoints(ObjectWrapper objectWrapper);
 
     List<Institution> getLocationsFromZone(Point point);
+
+    Institution getShortestLocationFromZone(Point point);
 }

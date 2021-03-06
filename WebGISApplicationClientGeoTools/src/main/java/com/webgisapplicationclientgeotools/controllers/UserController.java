@@ -37,4 +37,11 @@ public class UserController {
     public List<Institution> getSpecificLocationsFromZone(@RequestBody Point point){
         return userService.getLocationsFromZone(point);
     }
+
+    @ResponseBody
+    @PostMapping("/shortest")
+    @ResponseStatus(value = HttpStatus.OK, code = HttpStatus.OK)
+    public Institution getShortestLocationFromZone(@RequestBody Point point){
+        return userService.getShortestLocationFromZone(point);
+    }
 }

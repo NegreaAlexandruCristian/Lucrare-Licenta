@@ -30,4 +30,9 @@ public class UserServiceImplementation implements UserService {
     public List<Institution> getLocationsFromZone(Point point) {
         return userGeoTools.getLocationsFromZone(point);
     }
+
+    @Override
+    public Institution getShortestLocationFromZone(Point point) {
+        return userGeoTools.getShortestLocationFromZone(point);
+    }
 }
