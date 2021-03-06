@@ -1,5 +1,6 @@
 package com.webgisapplicationclientgeotools.geotools.implementation;
 
+import com.webgisapplicationclientgeotools.exceptions.utils.NotAllowedException;
 import com.webgisapplicationclientgeotools.geotools.UserGeoTools;
 import com.webgisapplicationclientgeotools.models.Institution;
 import com.webgisapplicationclientgeotools.models.ObjectWrapper;
@@ -120,8 +121,7 @@ public class UserGeoToolsImplementation implements UserGeoTools {
             case ("bus-stop"):
                 return "transport";
             default:
-                //TODO Implement exception handling
-                return null;
+                throw new NotAllowedException();
         }
     }
 
