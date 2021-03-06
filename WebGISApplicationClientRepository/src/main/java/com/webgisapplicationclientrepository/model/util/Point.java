@@ -7,11 +7,9 @@ import org.springframework.format.annotation.NumberFormat;
 import javax.validation.constraints.*;
 import java.math.BigDecimal;
 
-@Setter
-@Getter
-@ToString
-@NoArgsConstructor
+@Data
 @AllArgsConstructor
+@NoArgsConstructor
 @Schema(type = "POJO, JSON",
         description = "A POJO that holds a point on the map and because it has the 'implements Serializable'," +
                 " it can be given to the web app as JSON.",
@@ -49,7 +47,7 @@ public class Point{
     )
     private Long radius;
 
-    @NotNull(message = "The string latitude may not be null")
+    @NotNull(message = "The BigDecimal latitude may not be null")
     @NumberFormat(style = NumberFormat.Style.NUMBER)
     @Schema(name = "latitude",
             description = "The latitude field that will hold the institution type latitude.",
@@ -59,7 +57,7 @@ public class Point{
     )
     private BigDecimal latitude;
 
-    @NotNull(message = "The string longitude may not be null")
+    @NotNull(message = "The BigDecimal longitude may not be null")
     @NumberFormat(style = NumberFormat.Style.NUMBER)
     @Schema(name = "longitude",
             description = "The longitude field that will hold the institution type longitude.",

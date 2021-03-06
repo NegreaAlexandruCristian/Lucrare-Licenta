@@ -8,6 +8,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -41,11 +42,22 @@ public class ExceptionHandlers {
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ResponseBody
     @ExceptionHandler(HttpMessageNotReadableException.class)
-    public ResponseEntity<Object> methodArgumentNotValidException() {
+    public ResponseEntity<Object> methodArgumentNotValidExceptionHttp() {
         APIError apiError =
                 new APIError(HttpStatus.BAD_REQUEST, "Bad object request check! Check your input.",
                         "The object sent via @Request Body was incorrect, check to see," +
                         " if the fields are complete and correct.");
+        return new ResponseEntity<>(apiError, new HttpHeaders(), apiError.getStatus());
+    }
+
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ResponseBody
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public ResponseEntity<Object> methodArgumentNotValidException() {
+        APIError apiError =
+                new APIError(HttpStatus.BAD_REQUEST, "Bad object request check! Check your input.",
+                        "The object sent via @Request Body was incorrect, check to see," +
+                                " if the fields are complete and correct.");
         return new ResponseEntity<>(apiError, new HttpHeaders(), apiError.getStatus());
     }
 

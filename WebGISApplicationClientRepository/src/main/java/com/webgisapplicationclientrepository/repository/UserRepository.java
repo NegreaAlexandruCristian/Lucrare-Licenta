@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface UserRepository{
 
-    Number calculateDistance(BigDecimal fromLatitude, BigDecimal fromLongitude,
+    BigDecimal calculateDistance(BigDecimal fromLatitude, BigDecimal fromLongitude,
                              BigDecimal toLatitude, BigDecimal toLongitude);
 
     List<Institution> getLocationsFromZone(BigDecimal latitude, BigDecimal longitude,

@@ -24,10 +24,10 @@ public class UserRepositoryImplementation implements UserRepository {
     }
 
     @Override
-    public Number calculateDistance(BigDecimal fromLatitude, BigDecimal fromLongitude, BigDecimal toLatitude,
+    public BigDecimal calculateDistance(BigDecimal fromLatitude, BigDecimal fromLongitude, BigDecimal toLatitude,
                                     BigDecimal toLongitude) {
-        return (Number) entityManager.createNativeQuery("SELECT calculate_distance(" + fromLatitude +", " + fromLongitude +
-                ", " + toLatitude +", " + toLongitude +", 'K')").getSingleResult();
+        return BigDecimal.valueOf((Double) entityManager.createNativeQuery("SELECT calculate_distance(" + fromLatitude +", " + fromLongitude +
+                ", " + toLatitude +", " + toLongitude +", 'K')").getSingleResult());
     }
 
     @Override

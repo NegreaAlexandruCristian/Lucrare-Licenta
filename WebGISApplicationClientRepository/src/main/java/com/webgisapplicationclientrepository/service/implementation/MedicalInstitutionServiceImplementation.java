@@ -99,7 +99,7 @@ public class MedicalInstitutionServiceImplementation implements MedicalInstituti
                 }
             }
             default:{
-                throw new NotFoundException();
+                throw new NotAllowedException();
             }
         }
     }

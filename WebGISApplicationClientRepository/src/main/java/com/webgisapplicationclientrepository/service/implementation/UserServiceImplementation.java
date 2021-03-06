@@ -1,6 +1,7 @@
 package com.webgisapplicationclientrepository.service.implementation;
 
 import com.webgisapplicationclientrepository.exceptions.utils.ConstraintViolationExceptionCustom;
+import com.webgisapplicationclientrepository.exceptions.utils.NotAllowedException;
 import com.webgisapplicationclientrepository.model.util.Institution;
 import com.webgisapplicationclientrepository.model.util.ObjectWrapper;
 import com.webgisapplicationclientrepository.model.util.Point;
@@ -9,8 +10,11 @@ import com.webgisapplicationclientrepository.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
+import java.util.Map;
 
 @Service
 public class UserServiceImplementation implements UserService {
@@ -19,6 +23,13 @@ public class UserServiceImplementation implements UserService {
     private final String[] tableNames = new String []{
             "buss_stations", "hospital","pharmacy", "schools", "university"
     };
+    private final Map<Integer,String> types = Map.ofEntries(
+            Map.entry(1,"hospital"),
+            Map.entry(2,"buss_stations"),
+            Map.entry(3,"pharmacy"),
+            Map.entry(4,"schools"),
+            Map.entry(5,"university")
+    );
 
     @Autowired
     public UserServiceImplementation(UserRepository userRepository) {
@@ -31,9 +42,8 @@ public class UserServiceImplementation implements UserService {
         } else return toDistance.getLongitude() != null && toDistance.getLatitude() != null;
     }
 
-
     @Override
-    public Number calculateDistance(ObjectWrapper objectWrapper) {
+    public BigDecimal calculateDistance(ObjectWrapper objectWrapper) {
 
         Point fromDistance = objectWrapper.getStartingDistance();
         Point toDistance = objectWrapper.getFinishDestination();
@@ -47,8 +57,13 @@ public class UserServiceImplementation implements UserService {
 
     @Override
     public List<Institution> getLocationsFromZone(Point point){
-        return userRepository.getLocationsFromZone(point.getLatitude(), point.getLongitude(),
-                point.getCode(),point.getRadius());
+        final String code = point.getCode().toLowerCase();
+        if(types.containsValue(code)){
+            return userRepository.getLocationsFromZone(point.getLatitude(), point.getLongitude(),
+                    point.getCode(),point.getRadius());
+        } else {
+            throw new NotAllowedException();
+        }
     }
 
     @Override
@@ -63,7 +78,11 @@ public class UserServiceImplementation implements UserService {
 
     @Override
     public Institution getShortestLocationFromZone(Point point){
-        return userRepository.getShortestLocationFromZone(point);
+        final String code = point.getCode().toLowerCase();
+        if(types.containsValue(code)){
+            return userRepository.getShortestLocationFromZone(point);
+        } else {
+            throw new NotAllowedException();
+        }
     }
-
 }

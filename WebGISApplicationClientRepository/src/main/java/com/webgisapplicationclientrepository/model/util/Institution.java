@@ -14,7 +14,8 @@ import java.math.BigDecimal;
 
 @Data
 @Entity
-@EqualsAndHashCode(callSuper = false)
+@AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "medical_institution")
 @Schema(type = "POJO, JSON",
         description = "A POJO that holds any type of institution and because it has the 'implements Serializable'," +

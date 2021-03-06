@@ -6,6 +6,8 @@ import lombok.*;
 import javax.validation.constraints.NotNull;
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Schema(type = "POJO, JSON",
         description = "A POJO that holds two points on the map and because it has the 'implements Serializable'," +
                 " it can be given to the web app as JSON. This wrapped object is used to calculate different things like" +
