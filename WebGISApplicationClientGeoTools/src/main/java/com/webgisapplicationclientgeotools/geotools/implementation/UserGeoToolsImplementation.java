@@ -40,10 +40,10 @@ public class UserGeoToolsImplementation implements UserGeoTools {
 
         double distance = 0.0;
         try {
-            Coordinate start = new Coordinate(objectWrapper.getStartingDistance().getLatitude(),
-                    objectWrapper.getStartingDistance().getLongitude());
-            Coordinate end = new Coordinate(objectWrapper.getFinishDestination().getLatitude(),
-                    objectWrapper.getFinishDestination().getLongitude());
+            Coordinate start = new Coordinate(objectWrapper.getStartingDistance().getLatitude().doubleValue(),
+                    objectWrapper.getStartingDistance().getLongitude().doubleValue());
+            Coordinate end = new Coordinate(objectWrapper.getFinishDestination().getLatitude().doubleValue(),
+                    objectWrapper.getFinishDestination().getLongitude().doubleValue());
 
             CoordinateReferenceSystem crs = null;
             try {
@@ -145,7 +145,8 @@ public class UserGeoToolsImplementation implements UserGeoTools {
 
         Quantity<Length> dist = Quantities.getQuantity(point.getRadius(), SI.METRE);
         GeometryFactory gf = new GeometryFactory();
-        org.locationtech.jts.geom.Point p = gf.createPoint(new Coordinate(point.getLatitude(),point.getLongitude()));
+        org.locationtech.jts.geom.Point p = gf.createPoint(new Coordinate(point.getLatitude().doubleValue(),
+                point.getLongitude().doubleValue()));
         Geometry geometry = bufferPoint(dist, DefaultGeographicCRS.WGS84, p);
 
         List<Institution> list = getLocations(point.getCode());
@@ -171,8 +172,8 @@ public class UserGeoToolsImplementation implements UserGeoTools {
             Point finishingPoint = Point.builder()
                     .code("")
                     .radius(0L)
-                    .latitude(institution.getLatitude().doubleValue())
-                    .longitude(institution.getLongitude().doubleValue())
+                    .latitude(institution.getLatitude())
+                    .longitude(institution.getLongitude())
                     .build();
             ObjectWrapper objectWrapper = ObjectWrapper.builder()
                     .startingDistance(point)
