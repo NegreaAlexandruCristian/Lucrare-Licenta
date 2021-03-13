@@ -1,8 +1,8 @@
 package com.webgisapplicationclientrepository.repository;
 
 import com.webgisapplicationclientrepository.model.MedicalInstitution;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -10,7 +10,7 @@ import java.util.List;
 
 @Repository
 @Transactional
-public interface MedicalInstitutionRepository extends CrudRepository<MedicalInstitution, Long>{
+public interface MedicalInstitutionRepository extends JpaRepository<MedicalInstitution, Long> {
 
     @Query(value = "SELECT hospital.id AS id,hospital.nume AS nume, hospital.code AS code" +
             ", hospital.latitude AS latitude, hospital.longitude AS longitude" +

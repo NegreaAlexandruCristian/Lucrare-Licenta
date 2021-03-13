@@ -23,11 +23,20 @@ public class UserRepositoryImplementation implements UserRepository {
         this.entityManager = entityManager;
     }
 
+    //TODO sa calculeze in functie si de strazi/trotuar
+    //TODO To try to use ST_DistanceSphere instead of the built in function
+//    @Override
+//    public BigDecimal calculateDistance(BigDecimal fromLatitude, BigDecimal fromLongitude, BigDecimal toLatitude,
+//                                    BigDecimal toLongitude) {
+//        return BigDecimal.valueOf((Double) entityManager.createNativeQuery("SELECT calculate_distance(" + fromLatitude +", " + fromLongitude +
+//                ", " + toLatitude +", " + toLongitude +", 'K')").getSingleResult());
+//    }
+
     @Override
-    public BigDecimal calculateDistance(BigDecimal fromLatitude, BigDecimal fromLongitude, BigDecimal toLatitude,
-                                    BigDecimal toLongitude) {
-        return BigDecimal.valueOf((Double) entityManager.createNativeQuery("SELECT calculate_distance(" + fromLatitude +", " + fromLongitude +
-                ", " + toLatitude +", " + toLongitude +", 'K')").getSingleResult());
+    public BigDecimal calculateDistance(BigDecimal fromLatitude, BigDecimal fromLongitude, BigDecimal toLatitude, BigDecimal toLongitude) {
+        return BigDecimal.valueOf((Double)entityManager.createNativeQuery("" +
+                "SELECT ST_DistanceSphere(ST_MakePoint(" + fromLongitude + ", " + fromLatitude + ")," +
+                "ST_MakePoint(" + toLongitude + ", " + toLatitude +"));").getSingleResult());
     }
 
     @Override
@@ -37,9 +46,10 @@ public class UserRepositoryImplementation implements UserRepository {
                 " FROM " + code + " AS table_name " +
                         "WHERE ST_DWithin(table_name.geom," + "ST_GeogFromText('POINT(" + longitude  + " " + latitude + ")'), " + radius + ")"
                         /*" WHERE ST_PointInsideCircle(table_name.geom, " + longitude + "," + latitude +"," + radius +" * 0.00001);"*/ , Institution.class);
-        return query.getResultList();
+        return  query.getResultList();
     }
 
+    //TODO sa calculeze in functie si de strazi/trotuar
     @Override
     public Institution getShortestLocationFromZone(Point point) {
         Query query = entityManager.createNativeQuery(

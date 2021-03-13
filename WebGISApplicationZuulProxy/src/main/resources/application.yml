@@ -1,7 +1,6 @@
 #Application
 server:
   port: 8662
-
 spring:
   application:
     name: web-gis-application-zuul-proxy

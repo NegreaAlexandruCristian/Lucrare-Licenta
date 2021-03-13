@@ -102,7 +102,6 @@ public class UserGeoToolsImplementation implements UserGeoTools {
                 retGeom = JTS.transform(out, fromTransform);
 
             } catch (MismatchedDimensionException | TransformException e) {
-                // TODO Auto-generated catch block
                 e.printStackTrace();
             }
         }

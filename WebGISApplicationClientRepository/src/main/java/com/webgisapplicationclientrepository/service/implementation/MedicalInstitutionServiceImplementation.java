@@ -40,6 +40,7 @@ public class MedicalInstitutionServiceImplementation implements MedicalInstituti
         }
     }
 
+    //TODO To check why it's buggy
     @Override
     public List<MedicalInstitution> getAllMedicalLocations() {
         return Stream.concat(medicalInstitutionRepository.getPharmacyLocations().stream(),

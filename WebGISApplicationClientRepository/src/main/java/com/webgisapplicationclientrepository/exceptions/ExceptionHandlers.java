@@ -21,7 +21,8 @@ public class ExceptionHandlers {
     @ExceptionHandler(NotFoundException.class)
     public ResponseEntity<Object> notFoundException(RuntimeException exception) {
 
-        String error = exception.getMessage() + " because something inside the object or the object was : " + exception.getCause();
+        String error = exception.getMessage() + " because something inside the object or the object was : " + exception.getCause() + "" +
+                " or doesn't exist.";
 
         APIError apiError =
                 new APIError(HttpStatus.NOT_FOUND, exception.getLocalizedMessage(), error);
