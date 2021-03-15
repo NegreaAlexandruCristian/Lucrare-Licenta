@@ -48,6 +48,7 @@ public class PublicInstitutionServiceImplementation implements PublicInstitution
         }
     }
 
+    //TODO partial search
     @Override
     public PublicInstitution getPublicInstitutionByName(String code, String name) {
         String newCode = code.toLowerCase();

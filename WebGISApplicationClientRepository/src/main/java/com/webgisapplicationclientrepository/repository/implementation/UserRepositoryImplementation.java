@@ -24,19 +24,11 @@ public class UserRepositoryImplementation implements UserRepository {
     }
 
     //TODO sa calculeze in functie si de strazi/trotuar
-    //TODO To try to use ST_DistanceSphere instead of the built in function
-//    @Override
-//    public BigDecimal calculateDistance(BigDecimal fromLatitude, BigDecimal fromLongitude, BigDecimal toLatitude,
-//                                    BigDecimal toLongitude) {
-//        return BigDecimal.valueOf((Double) entityManager.createNativeQuery("SELECT calculate_distance(" + fromLatitude +", " + fromLongitude +
-//                ", " + toLatitude +", " + toLongitude +", 'K')").getSingleResult());
-//    }
-
     @Override
     public BigDecimal calculateDistance(BigDecimal fromLatitude, BigDecimal fromLongitude, BigDecimal toLatitude, BigDecimal toLongitude) {
         return BigDecimal.valueOf((Double)entityManager.createNativeQuery("" +
                 "SELECT ST_DistanceSphere(ST_MakePoint(" + fromLongitude + ", " + fromLatitude + ")," +
-                "ST_MakePoint(" + toLongitude + ", " + toLatitude +"));").getSingleResult());
+                "ST_MakePoint(" + toLongitude + ", " + toLatitude +"));").getSingleResult() * 0.001);
     }
 
     @Override
@@ -49,6 +41,7 @@ public class UserRepositoryImplementation implements UserRepository {
         return  query.getResultList();
     }
 
+    //TODO ST_ClosestPoint de incercat
     //TODO sa calculeze in functie si de strazi/trotuar
     @Override
     public Institution getShortestLocationFromZone(Point point) {

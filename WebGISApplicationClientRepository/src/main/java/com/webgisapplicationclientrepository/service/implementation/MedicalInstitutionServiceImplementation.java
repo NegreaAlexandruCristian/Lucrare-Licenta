@@ -48,6 +48,7 @@ public class MedicalInstitutionServiceImplementation implements MedicalInstituti
                 .collect(Collectors.toList());
     }
 
+    //TODO partial search
     @Override
     public MedicalInstitution getMedicalInstitutionByName(String code, String name) {
 
