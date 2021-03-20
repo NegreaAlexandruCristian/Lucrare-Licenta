@@ -1,6 +1,6 @@
 package com.webgisapplicationclientgeotools.services;
 
-import com.webgisapplicationclientgeotools.models.Institution;
+import com.webgisapplicationclientgeotools.dto.InstitutionDTO;
 import com.webgisapplicationclientgeotools.models.ObjectWrapper;
 import com.webgisapplicationclientgeotools.models.Point;
 
@@ -10,7 +10,7 @@ import java.util.List;
 public interface UserService {
     BigDecimal calculateDistanceBetweenTwoPoints(ObjectWrapper objectWrapper);
 
-    List<Institution> getLocationsFromZone(Point point);
+    List<InstitutionDTO> getLocationsFromZone(Point point);
 
-    Institution getShortestLocationFromZone(Point point);
+    InstitutionDTO getShortestLocationFromZone(Point point);
 }

@@ -1,7 +1,7 @@
 package com.webgisapplicationclientgeotools.controllers;
 
+import com.webgisapplicationclientgeotools.dto.InstitutionDTO;
 import com.webgisapplicationclientgeotools.exceptions.utils.APIError;
-import com.webgisapplicationclientgeotools.models.Institution;
 import com.webgisapplicationclientgeotools.models.ObjectWrapper;
 import com.webgisapplicationclientgeotools.models.Point;
 import com.webgisapplicationclientgeotools.services.UserService;
@@ -160,49 +160,42 @@ public class UserController {
                                             examples = @ExampleObject(name = "/api/geo-tools/user/location/zone"
                                                     , value = "[\n" +
                                                     "    {\n" +
-                                                    "        \"id\": 1,\n" +
                                                     "        \"name\": \"Adrian Petre - doctor\",\n" +
                                                     "        \"code\": \"hospital\",\n" +
                                                     "        \"latitude\": 45.77045822363855,\n" +
                                                     "        \"longitude\": 21.21882227116396\n" +
                                                     "    },\n" +
                                                     "    {\n" +
-                                                    "        \"id\": 69,\n" +
                                                     "        \"name\": \"Clinica Medvarix\",\n" +
                                                     "        \"code\": \"hospital\",\n" +
                                                     "        \"latitude\": 45.770411796381275,\n" +
                                                     "        \"longitude\": 21.21892330821231\n" +
                                                     "    },\n" +
                                                     "    {\n" +
-                                                    "        \"id\": 192,\n" +
                                                     "        \"name\": \"C. M. Dr. Fara Lucian\",\n" +
                                                     "        \"code\": \"hospital\",\n" +
                                                     "        \"latitude\": 45.766134681679894,\n" +
                                                     "        \"longitude\": 21.218982373016388\n" +
                                                     "    },\n" +
                                                     "    {\n" +
-                                                    "        \"id\": 224,\n" +
                                                     "        \"name\": \"C. M. Dr. Mihalceanu Ioan\",\n" +
                                                     "        \"code\": \"hospital\",\n" +
                                                     "        \"latitude\": 45.77380181601158,\n" +
                                                     "        \"longitude\": 21.2187516576721\n" +
                                                     "    },\n" +
                                                     "    {\n" +
-                                                    "        \"id\": 230,\n" +
                                                     "        \"name\": \"C. M. Dr. Motateanu Mihaela\",\n" +
                                                     "        \"code\": \"hospital\",\n" +
                                                     "        \"latitude\": 45.773596916478965,\n" +
                                                     "        \"longitude\": 21.22068583254088\n" +
                                                     "    },\n" +
                                                     "    {\n" +
-                                                    "        \"id\": 277,\n" +
                                                     "        \"name\": \"C. M. Nova Avramed\",\n" +
                                                     "        \"code\": \"hospital\",\n" +
                                                     "        \"latitude\": 45.76624204893813,\n" +
                                                     "        \"longitude\": 21.21894251904905\n" +
                                                     "    },\n" +
                                                     "    {\n" +
-                                                    "        \"id\": 290,\n" +
                                                     "        \"name\": \"Centrul Medical Dr. Popa\",\n" +
                                                     "        \"code\": \"hospital\",\n" +
                                                     "        \"latitude\": 45.77135397598815,\n" +
@@ -249,7 +242,7 @@ public class UserController {
                                     examples = @ExampleObject(name = "/api/geo-tools/user/location/zone"
                                             , value = "Sever related error")),
                             links = @Link(name = "NONE"))})
-    public List<Institution> getSpecificLocationsFromZone(@Valid @RequestBody Point point){
+    public List<InstitutionDTO> getSpecificLocationsFromZone(@Valid @RequestBody Point point){
         return userService.getLocationsFromZone(point);
     }
 
@@ -330,7 +323,7 @@ public class UserController {
                                     examples = @ExampleObject(name = "/api/geo-tools/user/location/shortest"
                                             , value = "Sever related error")),
                             links = @Link(name = "NONE"))})
-    public Institution getShortestLocationFromZone(@Valid @RequestBody Point point){
+    public InstitutionDTO getShortestLocationFromZone(@Valid @RequestBody Point point){
         return userService.getShortestLocationFromZone(point);
     }
 }

@@ -1,22 +1,22 @@
-package com.webgisapplicationfeignclient.model.util;
+package com.webgisapplicationfeignclient.model;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.NumberFormat;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
-import java.io.Serializable;
 import java.math.BigDecimal;
 
 @Data
-@NoArgsConstructor
+@EqualsAndHashCode
 @AllArgsConstructor
-public class Institution implements Serializable {
-
-    @NotNull(message = "The id can't be null")
-    private Long id;
+@NoArgsConstructor
+public class PublicInstitutionDTO {
 
     @NotNull(message = "The string name may not be null")
     @NotEmpty(message = "The string name may not be empty")

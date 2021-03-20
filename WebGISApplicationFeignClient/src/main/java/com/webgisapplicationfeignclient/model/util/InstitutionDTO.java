@@ -1,7 +1,8 @@
-package com.webgisapplicationfeignclientgeotools.models;
+package com.webgisapplicationfeignclient.model.util;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.NumberFormat;
 
@@ -9,13 +10,13 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
-import java.io.Serializable;
 import java.math.BigDecimal;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Institution implements Serializable {
+@EqualsAndHashCode
+public class InstitutionDTO {
 
     @NotNull(message = "The string name may not be null")
     @NotEmpty(message = "The string name may not be empty")

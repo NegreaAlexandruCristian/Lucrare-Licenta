@@ -1,6 +1,6 @@
 package com.webgisapplicationfeignclientgeotools.controller;
 
-import com.webgisapplicationfeignclientgeotools.models.Institution;
+import com.webgisapplicationfeignclientgeotools.models.InstitutionDTO;
 import com.webgisapplicationfeignclientgeotools.models.ObjectWrapper;
 import com.webgisapplicationfeignclientgeotools.models.Point;
 import com.webgisapplicationfeignclientgeotools.service.ClientGeoToolsServiceFeign;
@@ -32,14 +32,14 @@ public class ClientGeoToolsResourceController {
     @ResponseBody
     @PostMapping("/user/location/zone")
     @ResponseStatus(value = HttpStatus.OK, code = HttpStatus.OK)
-    List<Institution> getSpecificLocationsFromZone(@RequestBody Point point){
+    List<InstitutionDTO> getSpecificLocationsFromZone(@RequestBody Point point){
         return clientGeoToolsServiceFeign.getSpecificLocationsFromZone(point);
     }
 
     @ResponseBody
     @PostMapping("/user/location/shortest")
     @ResponseStatus(value = HttpStatus.OK, code = HttpStatus.OK)
-    Institution getShortestLocationFromZone(@RequestBody Point point){
+    InstitutionDTO getShortestLocationFromZone(@RequestBody Point point){
         return clientGeoToolsServiceFeign.getShortestLocationFromZone(point);
     }
 }

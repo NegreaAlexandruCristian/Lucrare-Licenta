@@ -1,6 +1,6 @@
 package com.webgisapplicationfeignclientgeotools.service;
 
-import com.webgisapplicationfeignclientgeotools.models.Institution;
+import com.webgisapplicationfeignclientgeotools.models.InstitutionDTO;
 import com.webgisapplicationfeignclientgeotools.models.ObjectWrapper;
 import com.webgisapplicationfeignclientgeotools.models.Point;
 import org.springframework.cloud.openfeign.FeignClient;
@@ -24,10 +24,10 @@ public interface ClientGeoToolsServiceFeign {
     @ResponseBody
     @PostMapping("/user/location/zone")
     @ResponseStatus(value = HttpStatus.OK, code = HttpStatus.OK)
-    List<Institution> getSpecificLocationsFromZone(@RequestBody Point point);
+    List<InstitutionDTO> getSpecificLocationsFromZone(@RequestBody Point point);
 
     @ResponseBody
     @PostMapping("/user/location/shortest")
     @ResponseStatus(value = HttpStatus.OK, code = HttpStatus.OK)
-    Institution getShortestLocationFromZone(@RequestBody Point point);
+    InstitutionDTO getShortestLocationFromZone(@RequestBody Point point);
 }

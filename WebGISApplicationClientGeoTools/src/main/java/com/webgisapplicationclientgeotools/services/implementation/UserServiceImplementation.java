@@ -1,8 +1,10 @@
 package com.webgisapplicationclientgeotools.services.implementation;
 
+import com.webgisapplicationclientgeotools.dto.InstitutionDTO;
 import com.webgisapplicationclientgeotools.exceptions.utils.ConstraintViolationExceptionCustom;
 import com.webgisapplicationclientgeotools.exceptions.utils.NotAllowedException;
 import com.webgisapplicationclientgeotools.geotools.UserGeoTools;
+import com.webgisapplicationclientgeotools.mapper.InstitutionMapper;
 import com.webgisapplicationclientgeotools.models.Institution;
 import com.webgisapplicationclientgeotools.models.ObjectWrapper;
 import com.webgisapplicationclientgeotools.models.Point;
@@ -13,6 +15,7 @@ import org.springframework.stereotype.Service;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @Service
 public class UserServiceImplementation implements UserService {
@@ -25,10 +28,12 @@ public class UserServiceImplementation implements UserService {
             Map.entry(4,"schools"),
             Map.entry(5,"university")
     );
+    private final InstitutionMapper institutionMapper;
 
     @Autowired
-    public UserServiceImplementation(UserGeoTools userGeoTools) {
+    public UserServiceImplementation(UserGeoTools userGeoTools, InstitutionMapper institutionMapper) {
         this.userGeoTools = userGeoTools;
+        this.institutionMapper = institutionMapper;
     }
 
     private boolean checkConstraints(Point fromDistance, Point toDistance) {
@@ -50,20 +55,24 @@ public class UserServiceImplementation implements UserService {
     }
 
     @Override
-    public List<Institution> getLocationsFromZone(Point point) {
+    public List<InstitutionDTO> getLocationsFromZone(Point point) {
         final String code = point.getCode().toLowerCase();
         if(types.containsValue(code)) {
-            return userGeoTools.getLocationsFromZone(point);
+            return userGeoTools.getLocationsFromZone(point)
+                    .stream()
+                    .map(institutionMapper::institutionToInstitutionDTO)
+                    .collect(Collectors.toList());
         } else {
             throw new NotAllowedException();
         }
     }
 
     @Override
-    public Institution getShortestLocationFromZone(Point point) {
+    public InstitutionDTO getShortestLocationFromZone(Point point) {
         final String code = point.getCode().toLowerCase();
         if(types.containsValue(code)) {
-            return userGeoTools.getShortestLocationFromZone(point);
+            Institution institution = userGeoTools.getShortestLocationFromZone(point);
+            return institutionMapper.institutionToInstitutionDTO(institution);
         } else {
             throw new NotAllowedException();
         }

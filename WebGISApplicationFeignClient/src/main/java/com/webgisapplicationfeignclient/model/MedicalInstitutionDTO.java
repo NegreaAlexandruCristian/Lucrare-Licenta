@@ -1,21 +1,22 @@
 package com.webgisapplicationfeignclient.model;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.NumberFormat;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
-import java.io.Serializable;
 import java.math.BigDecimal;
 
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
-public class MedicalInstitution implements Serializable {
-
-    @NotNull(message = "The id can't be null")
-    private Long id;
+@NoArgsConstructor
+@EqualsAndHashCode
+public class MedicalInstitutionDTO {
 
     @NotNull(message = "The string name may not be null")
     @NotEmpty(message = "The string name may not be empty")
@@ -30,8 +31,10 @@ public class MedicalInstitution implements Serializable {
     private String code;
 
     @NotNull(message = "The string latitude may not be null")
+    @NumberFormat(style = NumberFormat.Style.NUMBER)
     private BigDecimal latitude;
 
     @NotNull(message = "The string longitude may not be null")
+    @NumberFormat(style = NumberFormat.Style.NUMBER)
     private BigDecimal longitude;
 }
