@@ -1,7 +1,7 @@
 package com.webgisapplicationclientrepository.controller;
 
+import com.webgisapplicationclientrepository.dto.MedicalInstitutionDTO;
 import com.webgisapplicationclientrepository.exceptions.utils.APIError;
-import com.webgisapplicationclientrepository.model.MedicalInstitution;
 import com.webgisapplicationclientrepository.service.MedicalInstitutionService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -41,33 +41,29 @@ public class MedicalLocationsController {
                     parameters = @Parameter(name = "NONE", description = "None needed"),
                     responses = {
                             @ApiResponse(responseCode = "OK - 200", description = "List of medical institutions",
-                                            content = @Content(array = @ArraySchema(schema = @Schema(implementation = MedicalInstitution.class)), mediaType = "JSON",
+                                            content = @Content(array = @ArraySchema(schema = @Schema(implementation = MedicalInstitutionDTO.class)), mediaType = "JSON",
                                             examples = @ExampleObject(
                                                     name = "/api/medical/locations/get",
                                                     value = "[\n" +
                                                             "    {\n" +
-                                                            "        \"id\": 1,\n" +
                                                             "        \"name\": \"Avicenna\",\n" +
                                                             "        \"code\": \"pharmacy\",\n" +
                                                             "        \"latitude\": 45.7493014548189,\n" +
                                                             "        \"longitude\": 21.208001411361693\n" +
                                                             "    },\n" +
                                                             "    {\n" +
-                                                            "        \"id\": 2,\n" +
                                                             "        \"name\": \"Catena - Ciprian Porumbescu\",\n" +
                                                             "        \"code\": \"pharmacy\",\n" +
                                                             "        \"latitude\": 45.739003055098536,\n" +
                                                             "        \"longitude\": 21.21940612753906\n" +
                                                             "    },\n" +
                                                             "    {\n" +
-                                                            "        \"id\": 3,\n" +
                                                             "        \"name\": \"Help Net 36 - Naturii\",\n" +
                                                             "        \"code\": \"pharmacy\",\n" +
                                                             "        \"latitude\": 45.7583091,\n" +
                                                             "        \"longitude\": 21.2260092\n" +
                                                             "    },\n" +
                                                             "    {\n" +
-                                                            "        \"id\": 4,\n" +
                                                             "        \"name\": \"Catena - Badea Cartan\",\n" +
                                                             "        \"code\": \"pharmacy\",\n" +
                                                             "        \"latitude\": 45.76169193612952,\n" +
@@ -115,7 +111,7 @@ public class MedicalLocationsController {
                                             examples = @ExampleObject(name = "/api/medical/locations/get"
                                                     , value = "Sever related error")),
                                     links = @Link(name = "NONE"))})
-    public List<MedicalInstitution> getAllMedicalLocations(){
+    public List<MedicalInstitutionDTO> getAllMedicalLocations(){
         return medicalInstitutionService.getAllMedicalLocations();
     }
 
@@ -132,88 +128,76 @@ public class MedicalLocationsController {
             in = ParameterIn.PATH),
             responses = {
                     @ApiResponse(responseCode = "OK - 200", description = "List of a type of medical institution",
-                            content = @Content(array = @ArraySchema(schema = @Schema(implementation = MedicalInstitution.class)), mediaType = "JSON",
+                            content = @Content(array = @ArraySchema(schema = @Schema(implementation = MedicalInstitutionDTO.class)), mediaType = "JSON",
                                     examples = @ExampleObject(name = "/api/medical/locations/get/{type}",
                                             value = "[\n" +
                                                     "    {\n" +
-                                                    "        \"id\": 1,\n" +
                                                     "        \"name\": \"Adrian Petre - doctor\",\n" +
                                                     "        \"code\": \"hospital\",\n" +
                                                     "        \"latitude\": 45.77045822363855,\n" +
                                                     "        \"longitude\": 21.21882227116396\n" +
                                                     "    },\n" +
                                                     "    {\n" +
-                                                    "        \"id\": 2,\n" +
                                                     "        \"name\": \"C. M. Cardiovest\",\n" +
                                                     "        \"code\": \"hospital\",\n" +
                                                     "        \"latitude\": 45.75454019215455,\n" +
                                                     "        \"longitude\": 21.22144999206546\n" +
                                                     "    },\n" +
                                                     "    {\n" +
-                                                    "        \"id\": 3,\n" +
                                                     "        \"name\": \"C. M. Dalmed\",\n" +
                                                     "        \"code\": \"hospital\",\n" +
                                                     "        \"latitude\": 45.77404032011598,\n" +
                                                     "        \"longitude\": 21.238858839811655\n" +
                                                     "    },\n" +
                                                     "    {\n" +
-                                                    "        \"id\": 4,\n" +
                                                     "        \"name\": \"C. M. Dermatomed\",\n" +
                                                     "        \"code\": \"hospital\",\n" +
                                                     "        \"latitude\": 45.730636315826686,\n" +
                                                     "        \"longitude\": 21.210565923278864\n" +
                                                     "    },\n" +
                                                     "    {\n" +
-                                                    "        \"id\": 5,\n" +
                                                     "        \"name\": \"C. M. Dermadent\",\n" +
                                                     "        \"code\": \"hospital\",\n" +
                                                     "        \"latitude\": 45.75697397530617,\n" +
                                                     "        \"longitude\": 21.242195474729897\n" +
                                                     "    },\n" +
                                                     "    {\n" +
-                                                    "        \"id\": 6,\n" +
                                                     "        \"name\": \"C. M. Dispensar XXII\",\n" +
                                                     "        \"code\": \"hospital\",\n" +
                                                     "        \"latitude\": 45.76266928250933,\n" +
                                                     "        \"longitude\": 21.259274501049845\n" +
                                                     "    },\n" +
                                                     "    {\n" +
-                                                    "        \"id\": 7,\n" +
                                                     "        \"name\": \"C. M. Dr. Alina Babeu\",\n" +
                                                     "        \"code\": \"hospital\",\n" +
                                                     "        \"latitude\": 45.755231699389626,\n" +
                                                     "        \"longitude\": 21.226047300663822\n" +
                                                     "    },\n" +
                                                     "    {\n" +
-                                                    "        \"id\": 8,\n" +
                                                     "        \"name\": \"C. M. Dr. Ana Ioana\",\n" +
                                                     "        \"code\": \"hospital\",\n" +
                                                     "        \"latitude\": 45.76359361116812,\n" +
                                                     "        \"longitude\": 21.254811264418095\n" +
                                                     "    },\n" +
                                                     "    {\n" +
-                                                    "        \"id\": 9,\n" +
                                                     "        \"name\": \"C. M. Dr. Ardeleanu Elena\",\n" +
                                                     "        \"code\": \"hospital\",\n" +
                                                     "        \"latitude\": 45.75578291423356,\n" +
                                                     "        \"longitude\": 21.234903955541995\n" +
                                                     "    },\n" +
                                                     "    {\n" +
-                                                    "        \"id\": 10,\n" +
                                                     "        \"name\": \"C. M. Dr. Barbos Carmen\",\n" +
                                                     "        \"code\": \"hospital\",\n" +
                                                     "        \"latitude\": 45.76368725767846,\n" +
                                                     "        \"longitude\": 21.218483448410097\n" +
                                                     "    },\n" +
                                                     "    {\n" +
-                                                    "        \"id\": 11,\n" +
                                                     "        \"name\": \"C. M. Dr. Badea Rodica\",\n" +
                                                     "        \"code\": \"hospital\",\n" +
                                                     "        \"latitude\": 45.75695583056295,\n" +
                                                     "        \"longitude\": 21.251277494442775\n" +
                                                     "    },\n" +
                                                     "    {\n" +
-                                                    "        \"id\": 12,\n" +
                                                     "        \"name\": \"C. M. Dr. Bacean\",\n" +
                                                     "        \"code\": \"hospital\",\n" +
                                                     "        \"latitude\": 45.75516902842982,\n" +
@@ -260,7 +244,7 @@ public class MedicalLocationsController {
                                     examples = @ExampleObject(name = "/api/medical/locations/get/{type}"
                                             , value = "Sever related error")),
                             links = @Link(name = "NONE"))})
-    public List<MedicalInstitution> getPreferredMedicalLocations(@PathVariable("type") String code){
+    public List<MedicalInstitutionDTO> getPreferredMedicalLocations(@PathVariable("type") String code){
         return medicalInstitutionService.getPreferredMedicalLocations(code);
     }
 
@@ -282,10 +266,9 @@ public class MedicalLocationsController {
                                   in = ParameterIn.PATH)},
             responses = {
                     @ApiResponse(responseCode = "OK - 200", description = "A medical institution",
-                            content = @Content(schema = @Schema(implementation = MedicalInstitution.class), mediaType = "JSON",
+                            content = @Content(schema = @Schema(implementation = MedicalInstitutionDTO.class), mediaType = "JSON",
                             examples = @ExampleObject(name = "/api/medical/locations/get/{code}/name/{name}",
                                     value = "{\n" +
-                                            "    \"id\": 3,\n" +
                                             "    \"name\": \"C. M. Dalmed\",\n" +
                                             "    \"code\": \"hospital\",\n" +
                                             "    \"latitude\": 45.77404032011598,\n" +
@@ -330,7 +313,7 @@ public class MedicalLocationsController {
                                     examples = @ExampleObject(name = "/api/medical/locations/get/{code}/name/{name}"
                                             , value = "Sever related error")),
                             links = @Link(name = "NONE"))})
-    public MedicalInstitution getMedicalInstitutionLocationByName(@PathVariable(name = "code") String code,
+    public MedicalInstitutionDTO getMedicalInstitutionLocationByName(@PathVariable(name = "code") String code,
                                                         @PathVariable(name = "name") String name){
         return medicalInstitutionService.getMedicalInstitutionByName(code,name);
     }
@@ -353,10 +336,9 @@ public class MedicalLocationsController {
                             in = ParameterIn.PATH)},
             responses = {
                             @ApiResponse(responseCode = "OK - 200", description = "A medical institution",
-                                            content = @Content(schema = @Schema(implementation = MedicalInstitution.class), mediaType = "JSON",
+                                            content = @Content(schema = @Schema(implementation = MedicalInstitutionDTO.class), mediaType = "JSON",
                                             examples = @ExampleObject(name = "/api/medical/locations/get/{code}/id/{id}",
                                                     value = "{\n" +
-                                                            "    \"id\": 5,\n" +
                                                             "    \"name\": \"C. M. Dermadent\",\n" +
                                                             "    \"code\": \"hospital\",\n" +
                                                             "    \"latitude\": 45.75697397530617,\n" +
@@ -402,7 +384,7 @@ public class MedicalLocationsController {
                                             , value = "Sever related error")),
                             links = @Link(name = "NONE"))}
             )
-    public MedicalInstitution getMedicalInstitutionLocationById(@PathVariable(name = "code") String code,
+    public MedicalInstitutionDTO getMedicalInstitutionLocationById(@PathVariable(name = "code") String code,
                                                                 @PathVariable("id") Long id){
         return medicalInstitutionService.getMedicalInstitutionById(code,id);
     }

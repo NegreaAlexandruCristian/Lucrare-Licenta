@@ -1,37 +1,80 @@
 package com.webgisapplicationclientrepository.service.implementation;
 
+import com.webgisapplicationclientrepository.dto.MedicalInstitutionDTO;
 import com.webgisapplicationclientrepository.exceptions.utils.NotAllowedException;
 import com.webgisapplicationclientrepository.exceptions.utils.NotFoundException;
+import com.webgisapplicationclientrepository.mapper.InstitutionMapper;
 import com.webgisapplicationclientrepository.model.MedicalInstitution;
 import com.webgisapplicationclientrepository.repository.MedicalInstitutionRepository;
 import com.webgisapplicationclientrepository.service.MedicalInstitutionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.EntityManager;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 @Service
+@Transactional
 public class MedicalInstitutionServiceImplementation implements MedicalInstitutionService {
 
     private final MedicalInstitutionRepository medicalInstitutionRepository;
+    private final InstitutionMapper institutionMapper;
+    private final EntityManager entityManager;
 
     @Autowired
-    public MedicalInstitutionServiceImplementation(MedicalInstitutionRepository medicalInstitutionRepository) {
+    public MedicalInstitutionServiceImplementation(MedicalInstitutionRepository medicalInstitutionRepository, InstitutionMapper institutionMapper, EntityManager entityManager) {
         this.medicalInstitutionRepository = medicalInstitutionRepository;
+        this.institutionMapper = institutionMapper;
+        this.entityManager = entityManager;
+    }
+
+    private MedicalInstitutionDTO partialNameSearch(String name){
+
+        name = name.toLowerCase();
+        ArrayList<String> partialNames = new ArrayList<>();
+        String[] strings = name.split(" ");
+        for(int index = 0 ; index < strings.length ; index++){
+            String temp = "";
+            for(int j = 0 ; j < index + 1 ; j++){
+                temp = String.format("%s%s ", temp, strings[j]);
+            }
+            partialNames.add(temp);
+        }
+        List<MedicalInstitutionDTO> medicalInstitutionDTOS = new ArrayList<>(getAllMedicalLocations());
+        for(int index = partialNames.size() - 1; index > 0 ; index --){
+            String temporaryName = partialNames.get(index);
+            for(int j = 0 ; j < temporaryName.length() ; j ++){
+                String temp = temporaryName.substring(0, temporaryName.length()  - j);
+                for(MedicalInstitutionDTO medicalInstitutionDTO : medicalInstitutionDTOS){
+                    if(medicalInstitutionDTO.getName().toLowerCase().contains(temp)){
+                        return medicalInstitutionDTO;
+                    }
+                }
+            }
+
+        }
+        return null;
     }
 
     @Override
-    public List<MedicalInstitution> getPreferredMedicalLocations(String code) {
+    public List<MedicalInstitutionDTO> getPreferredMedicalLocations(String code) {
 
         code = code.toLowerCase();
         switch (code){
             case "hospital":{
-                return medicalInstitutionRepository.getHospitalLocations();
+                return medicalInstitutionRepository.getHospitalLocations()
+                        .stream()
+                        .map(institutionMapper::medicalInstitutionToMedicalInstitutionDTO)
+                        .collect(Collectors.toList());
             }
             case "pharmacy":{
-                return medicalInstitutionRepository.getPharmacyLocations();
+                return medicalInstitutionRepository.getPharmacyLocations()
+                        .stream()
+                        .map(institutionMapper::medicalInstitutionToMedicalInstitutionDTO)
+                        .collect(Collectors.toList());
             }
 
             default:{
@@ -40,17 +83,26 @@ public class MedicalInstitutionServiceImplementation implements MedicalInstituti
         }
     }
 
-    //TODO To check why it's buggy
     @Override
-    public List<MedicalInstitution> getAllMedicalLocations() {
-        return Stream.concat(medicalInstitutionRepository.getPharmacyLocations().stream(),
-                medicalInstitutionRepository.getHospitalLocations().stream())
+    public List<MedicalInstitutionDTO> getAllMedicalLocations() {
+
+        List<MedicalInstitutionDTO> medicalInstitutionDTOS = medicalInstitutionRepository.getHospitalLocations()
+                .stream()
+                .map(institutionMapper::medicalInstitutionToMedicalInstitutionDTO)
                 .collect(Collectors.toList());
+        entityManager.clear();
+        medicalInstitutionDTOS.addAll(
+                medicalInstitutionRepository.getPharmacyLocations()
+                .stream()
+                .map(institutionMapper::medicalInstitutionToMedicalInstitutionDTO)
+                .collect(Collectors.toList())
+        );
+        return medicalInstitutionDTOS;
     }
 
     //TODO partial search
     @Override
-    public MedicalInstitution getMedicalInstitutionByName(String code, String name) {
+    public MedicalInstitutionDTO getMedicalInstitutionByName(String code, String name) {
 
         String newCode = code.toLowerCase();
         switch (newCode){
@@ -58,9 +110,14 @@ public class MedicalInstitutionServiceImplementation implements MedicalInstituti
                 MedicalInstitution medicalInstitution =
                         medicalInstitutionRepository.getHospitalByName(name);
                 if(medicalInstitution == null){
-                    throw new NotFoundException();
+                    MedicalInstitutionDTO medicalInstitutionDTO = partialNameSearch(name);
+                    if(medicalInstitutionDTO != null){
+                        return medicalInstitutionDTO;
+                    } else {
+                        throw new NotFoundException();
+                    }
                 } else {
-                    return medicalInstitution;
+                    return institutionMapper.medicalInstitutionToMedicalInstitutionDTO(medicalInstitution);
                 }
             }
             case "pharmacy":{
@@ -69,7 +126,7 @@ public class MedicalInstitutionServiceImplementation implements MedicalInstituti
                 if(medicalInstitution == null){
                     throw new NotFoundException();
                 } else {
-                    return medicalInstitution;
+                    return institutionMapper.medicalInstitutionToMedicalInstitutionDTO(medicalInstitution);
                 }
             }
             default: {
@@ -79,7 +136,7 @@ public class MedicalInstitutionServiceImplementation implements MedicalInstituti
     }
 
     @Override
-    public MedicalInstitution getMedicalInstitutionById(String code, Long id) {
+    public MedicalInstitutionDTO getMedicalInstitutionById(String code, Long id) {
         String newCode = code.toLowerCase();
         switch (newCode){
             case "hospital":{
@@ -88,7 +145,7 @@ public class MedicalInstitutionServiceImplementation implements MedicalInstituti
                 if(medicalInstitution == null){
                     throw new NotFoundException();
                 } else {
-                    return medicalInstitution;
+                    return institutionMapper.medicalInstitutionToMedicalInstitutionDTO(medicalInstitution);
                 }
             }
             case "pharmacy":{
@@ -97,7 +154,7 @@ public class MedicalInstitutionServiceImplementation implements MedicalInstituti
                 if(medicalInstitution == null){
                     throw new NotFoundException();
                 } else {
-                    return medicalInstitution;
+                    return institutionMapper.medicalInstitutionToMedicalInstitutionDTO(medicalInstitution);
                 }
             }
             default:{

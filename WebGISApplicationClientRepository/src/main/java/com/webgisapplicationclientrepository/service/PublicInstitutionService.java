@@ -1,17 +1,17 @@
 package com.webgisapplicationclientrepository.service;
 
 
-import com.webgisapplicationclientrepository.model.PublicInstitution;
+import com.webgisapplicationclientrepository.dto.PublicInstitutionDTO;
 
 import java.util.List;
 
 public interface PublicInstitutionService {
 
-    List<PublicInstitution> getAllPublicLocations();
+    List<PublicInstitutionDTO> getAllPublicLocations();
 
-    List<PublicInstitution> getPreferredPublicLocations(String code);
+    List<PublicInstitutionDTO> getPreferredPublicLocations(String code);
 
-    PublicInstitution getPublicInstitutionByName(String code, String name);
+    PublicInstitutionDTO getPublicInstitutionByName(String code, String name);
 
-    PublicInstitution getPublicInstitutionById(String code, Long id);
+    PublicInstitutionDTO getPublicInstitutionById(String code, Long id);
 }

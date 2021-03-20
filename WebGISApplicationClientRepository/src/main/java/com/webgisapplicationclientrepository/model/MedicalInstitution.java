@@ -3,6 +3,7 @@ package com.webgisapplicationclientrepository.model;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.ToString;
 import org.springframework.format.annotation.NumberFormat;
 
 import javax.persistence.Column;

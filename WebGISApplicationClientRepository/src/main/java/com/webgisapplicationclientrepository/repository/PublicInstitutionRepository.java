@@ -28,7 +28,7 @@ public interface PublicInstitutionRepository extends JpaRepository<PublicInstitu
     @Query(value = "SELECT schools.id AS id,schools.nume AS nume, schools.code AS code" +
             ", schools.latitude AS latitude, schools.longitude AS longitude" +
             " FROM public.schools schools" +
-            " WHERE schools.nume = ?1"
+            " WHERE LOWER(schools.nume) LIKE LOWER('%?1%');"
             ,nativeQuery = true)
     PublicInstitution getSchoolByName(String name);
 
@@ -48,7 +48,7 @@ public interface PublicInstitutionRepository extends JpaRepository<PublicInstitu
     @Query(value = "SELECT university.id AS id,university.nume AS nume, university.code AS code" +
             ", university.latitude AS latitude, university.longitude AS longitude" +
             " FROM public.university university" +
-            " WHERE university.nume = ?1"
+            " WHERE LOWER(university.nume) LIKE LOWER('%?1%');"
             ,nativeQuery = true)
     PublicInstitution getUniversityByName(String name);
 }

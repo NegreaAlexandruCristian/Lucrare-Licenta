@@ -1,7 +1,7 @@
 package com.webgisapplicationclientrepository.controller;
 
+import com.webgisapplicationclientrepository.dto.TransportInstitutionDTO;
 import com.webgisapplicationclientrepository.exceptions.utils.APIError;
-import com.webgisapplicationclientrepository.model.TransportInstitution;
 import com.webgisapplicationclientrepository.service.TransportInstitutionService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -42,7 +42,7 @@ public class TransportLocationsController {
             parameters = @Parameter(name = "NONE", description = "None needed"),
             responses = {
                     @ApiResponse(responseCode = "OK - 200", description = "List of transport institutions",
-                                    content = @Content(array = @ArraySchema(schema = @Schema(implementation = TransportInstitution.class)), mediaType = "JSON",
+                                    content = @Content(array = @ArraySchema(schema = @Schema(implementation = TransportInstitutionDTO.class)), mediaType = "JSON",
                                     examples = @ExampleObject(name = "/api/transport/locations/get",
                                             value = "[\n" +
                                                     "    {\n" +
@@ -148,7 +148,7 @@ public class TransportLocationsController {
                                     examples = @ExampleObject(name = "/api/transport/locations/get"
                                             , value = "Sever related error")),
                             links = @Link(name = "NONE"))})
-    public List<TransportInstitution> getAllTransportLocations(){
+    public List<TransportInstitutionDTO> getAllTransportLocations(){
         return transportInstitutionService.getAllTransportLocations();
     }
 
@@ -165,7 +165,7 @@ public class TransportLocationsController {
                     in = ParameterIn.PATH),
             responses = {
                     @ApiResponse(responseCode = "OK - 200", description = "List of a type of transport institution",
-                                    content = @Content(array = @ArraySchema(schema = @Schema(implementation = TransportInstitution.class)), mediaType = "JSON",
+                                    content = @Content(array = @ArraySchema(schema = @Schema(implementation = TransportInstitutionDTO.class)), mediaType = "JSON",
                                     examples = @ExampleObject(name = "/api/transport/locations/get/{type}",
                                             value = "[\n" +
                                                     "    {\n" +
@@ -237,7 +237,7 @@ public class TransportLocationsController {
                                     examples = @ExampleObject(name = "/api/transport/locations/get/{type}"
                                             , value = "Sever related error")),
                             links = @Link(name = "NONE"))})
-    public List<TransportInstitution> getPreferredTransportLocations(@PathVariable("type") String code){
+    public List<TransportInstitutionDTO> getPreferredTransportLocations(@PathVariable("type") String code){
         return transportInstitutionService.getPreferredTransportLocations(code);
     }
 
@@ -254,7 +254,7 @@ public class TransportLocationsController {
                             in = ParameterIn.PATH)},
             responses = {
                     @ApiResponse(responseCode = "OK - 200", description = "A transport institution",
-                                    content = @Content(schema = @Schema(implementation = TransportInstitution.class), mediaType = "JSON",
+                                    content = @Content(schema = @Schema(implementation = TransportInstitutionDTO.class), mediaType = "JSON",
                                     examples = @ExampleObject(name = "/api/transport/locations/get/bus/station/name/{name}",
                                             value = "{\n" +
                                                     "    \"id\": 8,\n" +
@@ -302,7 +302,7 @@ public class TransportLocationsController {
                                     examples = @ExampleObject(name = "/api/transport/locations/get/bus/station/name/{name}"
                                             , value = "Sever related error")),
                             links = @Link(name = "NONE"))})
-    public TransportInstitution getBusStationLocationByName(@PathVariable("name") String name){
+    public TransportInstitutionDTO getBusStationLocationByName(@PathVariable("name") String name){
         return transportInstitutionService.getBusStationLocationByName(name);
     }
 
@@ -319,7 +319,7 @@ public class TransportLocationsController {
                             in = ParameterIn.PATH)},
             responses = {
                     @ApiResponse(responseCode = "OK - 200", description = "A transport institution",
-                                    content = @Content(schema = @Schema(implementation = TransportInstitution.class), mediaType = "JSON",
+                                    content = @Content(schema = @Schema(implementation = TransportInstitutionDTO.class), mediaType = "JSON",
                                     examples = @ExampleObject(name = "/api/transport/locations/get/bus/station/id/{id}",
                                             value = "{\n" +
                                                     "    \"id\": 12,\n" +
@@ -367,7 +367,7 @@ public class TransportLocationsController {
                                     examples = @ExampleObject(name = "/api/transport/locations/get/bus/station/id/{id}"
                                             , value = "Sever related error")),
                             links = @Link(name = "NONE"))})
-    public TransportInstitution getBusStationLocationById(@PathVariable("id") Long id){
+    public TransportInstitutionDTO getBusStationLocationById(@PathVariable("id") Long id){
         return transportInstitutionService.getBusStationLocationById(id);
     }
 }

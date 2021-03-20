@@ -1,16 +1,16 @@
 package com.webgisapplicationclientrepository.service;
 
-import com.webgisapplicationclientrepository.model.MedicalInstitution;
+import com.webgisapplicationclientrepository.dto.MedicalInstitutionDTO;
 
 import java.util.List;
 
 public interface MedicalInstitutionService {
 
-    List<MedicalInstitution> getPreferredMedicalLocations(String code);
+    List<MedicalInstitutionDTO> getPreferredMedicalLocations(String code);
 
-    List<MedicalInstitution> getAllMedicalLocations();
+    List<MedicalInstitutionDTO> getAllMedicalLocations();
 
-    MedicalInstitution getMedicalInstitutionByName(String code, String name);
+    MedicalInstitutionDTO getMedicalInstitutionByName(String code, String name);
 
-    MedicalInstitution getMedicalInstitutionById(String code, Long id);
+    MedicalInstitutionDTO getMedicalInstitutionById(String code, Long id);
 }

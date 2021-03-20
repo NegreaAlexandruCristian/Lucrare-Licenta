@@ -1,7 +1,9 @@
 package com.webgisapplicationclientrepository.service.implementation;
 
+import com.webgisapplicationclientrepository.dto.InstitutionDTO;
 import com.webgisapplicationclientrepository.exceptions.utils.ConstraintViolationExceptionCustom;
 import com.webgisapplicationclientrepository.exceptions.utils.NotAllowedException;
+import com.webgisapplicationclientrepository.mapper.InstitutionMapper;
 import com.webgisapplicationclientrepository.model.util.Institution;
 import com.webgisapplicationclientrepository.model.util.ObjectWrapper;
 import com.webgisapplicationclientrepository.model.util.Point;
@@ -10,11 +12,12 @@ import com.webgisapplicationclientrepository.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityManager;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @Service
 public class UserServiceImplementation implements UserService {
@@ -30,10 +33,14 @@ public class UserServiceImplementation implements UserService {
             Map.entry(4,"schools"),
             Map.entry(5,"university")
     );
+    private final EntityManager entityManager;
+    private final InstitutionMapper institutionMapper;
 
     @Autowired
-    public UserServiceImplementation(UserRepository userRepository) {
+    public UserServiceImplementation(UserRepository userRepository, EntityManager entityManager, InstitutionMapper institutionMapper) {
         this.userRepository = userRepository;
+        this.entityManager = entityManager;
+        this.institutionMapper = institutionMapper;
     }
 
     private boolean checkConstraints(Point fromDistance, Point toDistance) {
@@ -56,31 +63,40 @@ public class UserServiceImplementation implements UserService {
     }
 
     @Override
-    public List<Institution> getLocationsFromZone(Point point){
+    public List<InstitutionDTO> getLocationsFromZone(Point point){
         final String code = point.getCode().toLowerCase();
         if(types.containsValue(code)){
             return userRepository.getLocationsFromZone(point.getLatitude(), point.getLongitude(),
-                    point.getCode(),point.getRadius());
+                    point.getCode(),point.getRadius())
+                    .stream()
+                    .map(institutionMapper::institutionToInstitutionDTO)
+                    .collect(Collectors.toList());
         } else {
             throw new NotAllowedException();
         }
     }
 
     @Override
-    public List<Institution> getAllLocationsFromZone(Point point) {
-        List<Institution> institutionList = new ArrayList<>();
+    public List<InstitutionDTO> getAllLocationsFromZone(Point point) {
+        List<InstitutionDTO> institutionList = new ArrayList<>();
         for(String tableName: tableNames){
             institutionList.addAll(userRepository.getLocationsFromZone(point.getLatitude(), point.getLongitude(),
-                    tableName,point.getRadius()));
+                    tableName,point.getRadius())
+                .stream()
+                    .map(institutionMapper::institutionToInstitutionDTO)
+                    .collect(Collectors.toList())
+            );
+            entityManager.clear();
         }
         return institutionList;
     }
 
     @Override
-    public Institution getShortestLocationFromZone(Point point){
+    public InstitutionDTO getShortestLocationFromZone(Point point){
         final String code = point.getCode().toLowerCase();
         if(types.containsValue(code)){
-            return userRepository.getShortestLocationFromZone(point);
+            Institution institution = userRepository.getShortestLocationFromZone(point);
+            return institutionMapper.institutionToInstitutionDTO(institution);
         } else {
             throw new NotAllowedException();
         }

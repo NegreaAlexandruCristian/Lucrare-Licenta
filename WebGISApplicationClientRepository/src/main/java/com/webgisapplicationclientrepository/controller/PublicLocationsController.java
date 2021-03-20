@@ -1,7 +1,7 @@
 package com.webgisapplicationclientrepository.controller;
 
+import com.webgisapplicationclientrepository.dto.PublicInstitutionDTO;
 import com.webgisapplicationclientrepository.exceptions.utils.APIError;
-import com.webgisapplicationclientrepository.model.PublicInstitution;
 import com.webgisapplicationclientrepository.service.PublicInstitutionService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -41,7 +41,7 @@ public class PublicLocationsController {
             parameters = @Parameter(name = "NONE", description = "None needed"),
             responses = {
                     @ApiResponse(responseCode = "OK - 200", description = "List of public institutions",
-                                    content = @Content(array = @ArraySchema(schema = @Schema(implementation = PublicInstitution.class)), mediaType = "JSON",
+                                    content = @Content(array = @ArraySchema(schema = @Schema(implementation = PublicInstitutionDTO.class)), mediaType = "JSON",
                                             examples = @ExampleObject(name = "/api/public/locations/get",
                                                     value = "[\n" +
                                                             "    {\n" +
@@ -148,7 +148,7 @@ public class PublicLocationsController {
                                     examples = @ExampleObject(name = "/api/public/locations/get"
                                             , value = "Sever related error")),
                             links = @Link(name = "NONE"))})
-    public List<PublicInstitution> getAllPublicLocations(){
+    public List<PublicInstitutionDTO> getAllPublicLocations(){
         return publicInstitutionService.getAllPublicLocations();
     }
 
@@ -165,7 +165,7 @@ public class PublicLocationsController {
                     in = ParameterIn.PATH),
             responses = {
                     @ApiResponse(responseCode = "OK - 200", description = "List of a type of public institution",
-                                    content = @Content(array = @ArraySchema(schema = @Schema(implementation = PublicInstitution.class)), mediaType = "JSON",
+                                    content = @Content(array = @ArraySchema(schema = @Schema(implementation = PublicInstitutionDTO.class)), mediaType = "JSON",
                                     examples = @ExampleObject(name = "/api/public/locations/get/school",
                                             value = "[\n" +
                                                     "    {\n" +
@@ -251,7 +251,7 @@ public class PublicLocationsController {
                                     examples = @ExampleObject(name = "/api/public/locations/get/{type}"
                                             , value = "Sever related error")),
                             links = @Link(name = "NONE"))})
-    public List<PublicInstitution> getPreferredPublicLocations(@PathVariable("type") String code){
+    public List<PublicInstitutionDTO> getPreferredPublicLocations(@PathVariable("type") String code){
         return publicInstitutionService.getPreferredPublicLocations(code);
     }
 
@@ -272,7 +272,7 @@ public class PublicLocationsController {
                             in = ParameterIn.PATH)},
             responses = {
                     @ApiResponse(responseCode = "OK - 200", description = "A public institution",
-                                    content = @Content(schema = @Schema(implementation = PublicInstitution.class), mediaType = "JSON",
+                                    content = @Content(schema = @Schema(implementation = PublicInstitutionDTO.class), mediaType = "JSON",
                                     examples = @ExampleObject(
                                             name = "/api/public/locations/get/{code}/name/{name}",
                                             value = "{\n" +
@@ -321,7 +321,7 @@ public class PublicLocationsController {
                                     examples = @ExampleObject(name = "api/geo-tools/user/location/distance"
                                             , value = "Sever related error")),
                             links = @Link(name = "NONE"))})
-    public PublicInstitution getPublicInstitutionLocationByName(@PathVariable("code") String code,
+    public PublicInstitutionDTO getPublicInstitutionLocationByName(@PathVariable("code") String code,
                                                      @PathVariable("name") String name){
         return publicInstitutionService.getPublicInstitutionByName(code, name);
     }
@@ -343,7 +343,7 @@ public class PublicLocationsController {
                             in = ParameterIn.PATH)},
             responses = {
                     @ApiResponse(responseCode = "OK - 200", description = "A public institution",
-                                    content = @Content(schema = @Schema(implementation = PublicInstitution.class), mediaType = "JSON",
+                                    content = @Content(schema = @Schema(implementation = PublicInstitutionDTO.class), mediaType = "JSON",
                                     examples = @ExampleObject(name = "/api/public/locations/get/{code}/id/{id}",
                                             value = "{\n" +
                                                     "    \"id\": 50,\n" +
@@ -391,7 +391,7 @@ public class PublicLocationsController {
                                     examples = @ExampleObject(name = "api/geo-tools/user/location/distance"
                                             , value = "Sever related error")),
                             links = @Link(name = "NONE"))})
-    public PublicInstitution getPublicInstitutionLocationById(@PathVariable("code") String code,
+    public PublicInstitutionDTO getPublicInstitutionLocationById(@PathVariable("code") String code,
                                                    @PathVariable("id") Long id){
         return publicInstitutionService.getPublicInstitutionById(code, id);
     }

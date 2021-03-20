@@ -1,6 +1,6 @@
 package com.webgisapplicationclientrepository.controller;
 
-import com.webgisapplicationclientrepository.model.util.Institution;
+import com.webgisapplicationclientrepository.dto.InstitutionDTO;
 import com.webgisapplicationclientrepository.model.util.ObjectWrapper;
 import com.webgisapplicationclientrepository.model.util.Point;
 import com.webgisapplicationclientrepository.service.UserService;
@@ -155,53 +155,46 @@ public class UserController {
                     "}")),
             responses = {
                     @ApiResponse(responseCode = "OK - 200", description = "Locations from a specific zone.",
-                                    content = @Content(array = @ArraySchema(schema = @Schema(implementation = Institution.class)), mediaType = "JSON",
+                                    content = @Content(array = @ArraySchema(schema = @Schema(implementation = InstitutionDTO.class)), mediaType = "JSON",
                                             examples = @ExampleObject(name = "/api/user/location/zone"
                                                     , value = "[\n" +
                                                     "    {\n" +
-                                                    "        \"id\": 1,\n" +
                                                     "        \"name\": \"Adrian Petre - doctor\",\n" +
                                                     "        \"code\": \"hospital\",\n" +
                                                     "        \"latitude\": 45.77045822363855,\n" +
                                                     "        \"longitude\": 21.21882227116396\n" +
                                                     "    },\n" +
                                                     "    {\n" +
-                                                    "        \"id\": 69,\n" +
                                                     "        \"name\": \"Clinica Medvarix\",\n" +
                                                     "        \"code\": \"hospital\",\n" +
                                                     "        \"latitude\": 45.770411796381275,\n" +
                                                     "        \"longitude\": 21.21892330821231\n" +
                                                     "    },\n" +
                                                     "    {\n" +
-                                                    "        \"id\": 192,\n" +
                                                     "        \"name\": \"C. M. Dr. Fara Lucian\",\n" +
                                                     "        \"code\": \"hospital\",\n" +
                                                     "        \"latitude\": 45.766134681679894,\n" +
                                                     "        \"longitude\": 21.218982373016388\n" +
                                                     "    },\n" +
                                                     "    {\n" +
-                                                    "        \"id\": 224,\n" +
                                                     "        \"name\": \"C. M. Dr. Mihalceanu Ioan\",\n" +
                                                     "        \"code\": \"hospital\",\n" +
                                                     "        \"latitude\": 45.77380181601158,\n" +
                                                     "        \"longitude\": 21.2187516576721\n" +
                                                     "    },\n" +
                                                     "    {\n" +
-                                                    "        \"id\": 230,\n" +
                                                     "        \"name\": \"C. M. Dr. Motateanu Mihaela\",\n" +
                                                     "        \"code\": \"hospital\",\n" +
                                                     "        \"latitude\": 45.773596916478965,\n" +
                                                     "        \"longitude\": 21.22068583254088\n" +
                                                     "    },\n" +
                                                     "    {\n" +
-                                                    "        \"id\": 277,\n" +
                                                     "        \"name\": \"C. M. Nova Avramed\",\n" +
                                                     "        \"code\": \"hospital\",\n" +
                                                     "        \"latitude\": 45.76624204893813,\n" +
                                                     "        \"longitude\": 21.21894251904905\n" +
                                                     "    },\n" +
                                                     "    {\n" +
-                                                    "        \"id\": 290,\n" +
                                                     "        \"name\": \"Centrul Medical Dr. Popa\",\n" +
                                                     "        \"code\": \"hospital\",\n" +
                                                     "        \"latitude\": 45.77135397598815,\n" +
@@ -248,7 +241,7 @@ public class UserController {
                                     examples = @ExampleObject(name = "/api/user/location/zone"
                                             , value = "Sever related error")),
                             links = @Link(name = "NONE"))})
-    public List<Institution> getSpecificLocationsFromZone(@Valid @RequestBody Point point){
+    public List<InstitutionDTO> getSpecificLocationsFromZone(@Valid @RequestBody Point point){
         return userService.getLocationsFromZone(point);
     }
 
@@ -260,7 +253,7 @@ public class UserController {
                     " that contains a latitude, longitude, radius and the code where : latitude and longitude speak" +
                     " for themselves, code which represents the institution and radius the circle size where the location are. " +
                     "Here the code isn't used because i return every type of location in that zone.",
-                    content = @Content(schema = @Schema(implementation = Institution.class),
+                    content = @Content(schema = @Schema(implementation = InstitutionDTO.class),
                             examples = @ExampleObject(name = "/api/user/location/all"
                                     , value = "{\n" +
                                     "    \"code\": \"hospital\",\n" +
@@ -282,53 +275,46 @@ public class UserController {
                     "}")),
             responses = {
                     @ApiResponse(responseCode = "OK - 200", description = "Every type of institution locations from a zone.",
-                                    content = @Content(array = @ArraySchema(schema = @Schema(implementation = Institution.class)), mediaType = "JSON",
+                                    content = @Content(array = @ArraySchema(schema = @Schema(implementation = InstitutionDTO.class)), mediaType = "JSON",
                                             examples = @ExampleObject(name = "/user/location/all"
                                                     , value = "[...." +
                                                     "{\n" +
-                                                    "        \"id\": 198,\n" +
                                                     "        \"name\": \"Statie RATT - Calea Torontalului colt cu Liege retur\",\n" +
                                                     "        \"code\": \"bus-stop\",\n" +
                                                     "        \"latitude\": 45.7723693297404,\n" +
                                                     "        \"longitude\": 21.216583982803286\n" +
                                                     "    },\n" +
                                                     "    {\n" +
-                                                    "        \"id\": 1,\n" +
                                                     "        \"name\": \"Adrian Petre - doctor\",\n" +
                                                     "        \"code\": \"hospital\",\n" +
                                                     "        \"latitude\": 45.77045822363855,\n" +
                                                     "        \"longitude\": 21.21882227116396\n" +
                                                     "    },\n" +
                                                     "    {\n" +
-                                                    "        \"id\": 69,\n" +
                                                     "        \"name\": \"Clinica Medvarix\",\n" +
                                                     "        \"code\": \"hospital\",\n" +
                                                     "        \"latitude\": 45.770411796381275,\n" +
                                                     "        \"longitude\": 21.21892330821231\n" +
                                                     "    },\n" +
                                                     "    {\n" +
-                                                    "        \"id\": 192,\n" +
                                                     "        \"name\": \"C. M. Dr. Fara Lucian\",\n" +
                                                     "        \"code\": \"hospital\",\n" +
                                                     "        \"latitude\": 45.766134681679894,\n" +
                                                     "        \"longitude\": 21.218982373016388\n" +
                                                     "    },\n" +
                                                     "    {\n" +
-                                                    "        \"id\": 224,\n" +
                                                     "        \"name\": \"C. M. Dr. Mihalceanu Ioan\",\n" +
                                                     "        \"code\": \"hospital\",\n" +
                                                     "        \"latitude\": 45.77380181601158,\n" +
                                                     "        \"longitude\": 21.2187516576721\n" +
                                                     "    },\n" +
                                                     "    {\n" +
-                                                    "        \"id\": 230,\n" +
                                                     "        \"name\": \"C. M. Dr. Motateanu Mihaela\",\n" +
                                                     "        \"code\": \"hospital\",\n" +
                                                     "        \"latitude\": 45.773596916478965,\n" +
                                                     "        \"longitude\": 21.22068583254088\n" +
                                                     "    },\n" +
                                                     "    {\n" +
-                                                    "        \"id\": 277,\n" +
                                                     "        \"name\": \"C. M. Nova Avramed\",\n" +
                                                     "        \"code\": \"hospital\",\n" +
                                                     "        \"latitude\": 45.76624204893813,\n" +
@@ -374,7 +360,7 @@ public class UserController {
                                     examples = @ExampleObject(name = "/api/user/location/all"
                                             , value = "Sever related error")),
                             links = @Link(name = "NONE"))})
-    public List<Institution> getAllLocationsFromZone(@Valid @RequestBody Point point) {
+    public List<InstitutionDTO> getAllLocationsFromZone(@Valid @RequestBody Point point) {
         return userService.getAllLocationsFromZone(point);
     }
 
@@ -407,10 +393,9 @@ public class UserController {
                     "}")),
             responses = {
                     @ApiResponse(responseCode = "OK - 200", description = "The specific location type location closest to the given point.",
-                                    content = @Content(schema = @Schema(implementation = Institution.class), mediaType = "JSON",
+                                    content = @Content(schema = @Schema(implementation = InstitutionDTO.class), mediaType = "JSON",
                                             examples = @ExampleObject(name = "/api/user/location/shortest"
                                                     , value = "{\n" +
-                                                    "    \"id\": 426,\n" +
                                                     "    \"name\": \"Spitalul Municipal Lugoj\",\n" +
                                                     "    \"code\": \"hospital\",\n" +
                                                     "    \"latitude\": 45.690420066015456,\n" +
@@ -455,7 +440,7 @@ public class UserController {
                                     examples = @ExampleObject(name = "/api/user/location/shortest"
                                             , value = "Sever related error")),
                             links = @Link(name = "NONE"))})
-    public Institution getShortestLocationFromZone(@Valid @RequestBody Point point){
+    public InstitutionDTO getShortestLocationFromZone(@Valid @RequestBody Point point){
         return userService.getShortestLocationFromZone(point);
     }
 }

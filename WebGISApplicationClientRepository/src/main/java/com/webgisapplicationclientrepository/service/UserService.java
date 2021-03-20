@@ -1,6 +1,6 @@
 package com.webgisapplicationclientrepository.service;
 
-import com.webgisapplicationclientrepository.model.util.Institution;
+import com.webgisapplicationclientrepository.dto.InstitutionDTO;
 import com.webgisapplicationclientrepository.model.util.ObjectWrapper;
 import com.webgisapplicationclientrepository.model.util.Point;
 
@@ -11,9 +11,9 @@ public interface UserService {
 
     BigDecimal calculateDistance(ObjectWrapper objectWrapper);
 
-    List<Institution> getLocationsFromZone(Point point);
+    List<InstitutionDTO> getLocationsFromZone(Point point);
 
-    List<Institution> getAllLocationsFromZone(Point point);
+    List<InstitutionDTO> getAllLocationsFromZone(Point point);
 
-    Institution getShortestLocationFromZone(Point point);
+    InstitutionDTO getShortestLocationFromZone(Point point);
 }

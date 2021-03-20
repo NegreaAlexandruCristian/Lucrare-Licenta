@@ -21,7 +21,7 @@ public interface TransportInstitutionRepository extends JpaRepository<TransportI
     @Query(value = "SELECT buss_stations.id AS id,buss_stations.nume AS nume, buss_stations.code AS code" +
             ", buss_stations.latitude AS latitude, buss_stations.longitude AS longitude" +
             " FROM public.buss_stations buss_stations" +
-            " WHERE buss_stations.nume = ?1"
+            " WHERE LOWER(buss_stations.nume) LIKE LOWER('%?1%');"
             ,nativeQuery = true)
     TransportInstitution getBusStationLocationByName(String name);
 
