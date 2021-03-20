@@ -68,7 +68,6 @@ public class TransportInstitutionServiceImplementation implements TransportInsti
         throw new NotAllowedException();
     }
 
-    //TODO partial search
     @Override
     public TransportInstitutionDTO getBusStationLocationByName(String name) {
 

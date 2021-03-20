@@ -100,7 +100,6 @@ public class MedicalInstitutionServiceImplementation implements MedicalInstituti
         return medicalInstitutionDTOS;
     }
 
-    //TODO partial search
     @Override
     public MedicalInstitutionDTO getMedicalInstitutionByName(String code, String name) {
 

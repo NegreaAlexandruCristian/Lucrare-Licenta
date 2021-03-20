@@ -1,2 +1,2 @@
-- Acea metoda ce returneaza gresit insitutiile medicale
-- Daca e ok metoda aceea de calculare a distantei, plus returneaza diferit fata de geotools
+- Cum returnez distantele in functie de strazi
+- Intefata

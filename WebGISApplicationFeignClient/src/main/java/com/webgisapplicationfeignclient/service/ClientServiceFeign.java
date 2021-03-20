@@ -1,9 +1,9 @@
 package com.webgisapplicationfeignclient.service;
 
-import com.webgisapplicationfeignclient.model.MedicalInstitution;
-import com.webgisapplicationfeignclient.model.PublicInstitution;
-import com.webgisapplicationfeignclient.model.TransportInstitution;
-import com.webgisapplicationfeignclient.model.util.Institution;
+import com.webgisapplicationfeignclient.model.MedicalInstitutionDTO;
+import com.webgisapplicationfeignclient.model.PublicInstitutionDTO;
+import com.webgisapplicationfeignclient.model.TransportInstitutionDTO;
+import com.webgisapplicationfeignclient.model.util.InstitutionDTO;
 import com.webgisapplicationfeignclient.model.util.ObjectWrapper;
 import com.webgisapplicationfeignclient.model.util.Point;
 import org.springframework.cloud.openfeign.FeignClient;
@@ -18,51 +18,51 @@ public interface ClientServiceFeign {
 
     @ResponseBody
     @GetMapping("/public/locations/get")
-    List<PublicInstitution> getAllPublicLocations();
+    List<PublicInstitutionDTO> getAllPublicLocations();
 
     @ResponseBody
     @GetMapping("/public/locations/get/{type}")
-    List<PublicInstitution> getPreferredPublicLocations(@PathVariable("type") String code);
+    List<PublicInstitutionDTO> getPreferredPublicLocations(@PathVariable("type") String code);
 
     @ResponseBody
     @GetMapping("/public/locations/get/{code}/name/{name}")
-    PublicInstitution getPublicInstitutionLocationByName(@PathVariable("code") String code,
+    PublicInstitutionDTO getPublicInstitutionDTOLocationByName(@PathVariable("code") String code,
                                                          @PathVariable("name") String name);
     @ResponseBody
     @GetMapping("/public/locations/get/{code}/id/{id}")
-    PublicInstitution getPublicInstitutionLocationById(@PathVariable("code") String code,
+    PublicInstitutionDTO getPublicInstitutionDTOLocationById(@PathVariable("code") String code,
                                                        @PathVariable("id") Long id);
     @ResponseBody
     @GetMapping("/medical/locations/get")
-    List<MedicalInstitution> getAllMedicalLocations();
+    List<MedicalInstitutionDTO> getAllMedicalLocations();
 
     @ResponseBody
     @GetMapping("/medical/locations/get/{type}")
-    List<MedicalInstitution> getPreferredMedicalLocations(@PathVariable("type") String code);
+    List<MedicalInstitutionDTO> getPreferredMedicalLocations(@PathVariable("type") String code);
 
     @ResponseBody
     @GetMapping("/medical/locations/get/{code}/name/{name}")
-    MedicalInstitution getMedicalInstitutionLocationByName(@PathVariable(name = "code") String code,
+    MedicalInstitutionDTO getMedicalInstitutionDTOLocationByName(@PathVariable(name = "code") String code,
                                                                   @PathVariable(name = "name") String name);
     @ResponseBody
     @GetMapping("/medical/locations/get/{code}/id/{id}")
-    MedicalInstitution getMedicalInstitutionLocationById(@PathVariable(name = "code") String code,
+    MedicalInstitutionDTO getMedicalInstitutionDTOLocationById(@PathVariable(name = "code") String code,
                                                          @PathVariable("id") Long id);
     @ResponseBody
     @GetMapping("/transport/locations/get")
-    List<TransportInstitution> getAllTransportLocations();
+    List<TransportInstitutionDTO> getAllTransportLocations();
 
     @ResponseBody
     @GetMapping("/transport/locations/get/{type}")
-    List<TransportInstitution> getPreferredTransportLocations(@PathVariable("type") String code);
+    List<TransportInstitutionDTO> getPreferredTransportLocations(@PathVariable("type") String code);
 
     @ResponseBody
     @GetMapping("/transport/locations/get/bus/station/name/{name}")
-    TransportInstitution getBusStationLocationByName(@PathVariable("name") String name);
+    TransportInstitutionDTO getBusStationLocationByName(@PathVariable("name") String name);
 
     @ResponseBody
     @GetMapping("/transport/locations/get/bus/station/id/{id}")
-    TransportInstitution getBusStationLocationById(@PathVariable("id") Long id);
+    TransportInstitutionDTO getBusStationLocationById(@PathVariable("id") Long id);
 
     @ResponseBody
     @PostMapping("/user/location/distance")
@@ -70,14 +70,14 @@ public interface ClientServiceFeign {
 
     @ResponseBody
     @PostMapping("/user/location/zone")
-    List<Institution> getLocationsFromZone(@Valid @RequestBody Point point);
+    List<InstitutionDTO> getLocationsFromZone(@Valid @RequestBody Point point);
 
     @ResponseBody
     @PostMapping("/user/location/all")
-    List<Institution> getAllLocationsFromZone(@Valid @RequestBody Point point);
+    List<InstitutionDTO> getAllLocationsFromZone(@Valid @RequestBody Point point);
 
     @ResponseBody
     @PostMapping("/user/location/shortest")
-    Institution getShortestLocationFromZone(@Valid @RequestBody Point point);
+    InstitutionDTO getShortestLocationFromZone(@Valid @RequestBody Point point);
 
 }
