@@ -9,6 +9,7 @@ import com.webgisapplicationclientgeotools.models.Institution;
 import com.webgisapplicationclientgeotools.models.ObjectWrapper;
 import com.webgisapplicationclientgeotools.models.Point;
 import com.webgisapplicationclientgeotools.services.UserService;
+import com.webgisapplicationclientgeotools.services.util.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,13 +22,7 @@ import java.util.stream.Collectors;
 public class UserServiceImplementation implements UserService {
 
     private final UserGeoTools userGeoTools;
-    private final Map<Integer,String> types = Map.ofEntries(
-            Map.entry(1,"hospital"),
-            Map.entry(2,"buss_stations"),
-            Map.entry(3,"pharmacy"),
-            Map.entry(4,"schools"),
-            Map.entry(5,"university")
-    );
+
     private final InstitutionMapper institutionMapper;
 
     @Autowired
@@ -57,7 +52,7 @@ public class UserServiceImplementation implements UserService {
     @Override
     public List<InstitutionDTO> getLocationsFromZone(Point point) {
         final String code = point.getCode().toLowerCase();
-        if(types.containsValue(code)) {
+        if(Utils.types.containsValue(code)) {
             return userGeoTools.getLocationsFromZone(point)
                     .stream()
                     .map(institutionMapper::institutionToInstitutionDTO)
@@ -70,11 +65,19 @@ public class UserServiceImplementation implements UserService {
     @Override
     public InstitutionDTO getShortestLocationFromZone(Point point) {
         final String code = point.getCode().toLowerCase();
-        if(types.containsValue(code)) {
+        if(Utils.types.containsValue(code)) {
             Institution institution = userGeoTools.getShortestLocationFromZone(point);
             return institutionMapper.institutionToInstitutionDTO(institution);
         } else {
             throw new NotAllowedException();
         }
+    }
+
+    @Override
+    public List<InstitutionDTO> getAllLocationsFromZone(Point point) {
+        return userGeoTools.getAllLocationsFromZone(point)
+                .stream()
+                .map(institutionMapper::institutionToInstitutionDTO)
+                .collect(Collectors.toList());
     }
 }

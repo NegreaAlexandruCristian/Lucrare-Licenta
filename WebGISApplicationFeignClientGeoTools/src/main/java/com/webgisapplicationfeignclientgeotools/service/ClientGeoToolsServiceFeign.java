@@ -30,4 +30,9 @@ public interface ClientGeoToolsServiceFeign {
     @PostMapping("/user/location/shortest")
     @ResponseStatus(value = HttpStatus.OK, code = HttpStatus.OK)
     InstitutionDTO getShortestLocationFromZone(@RequestBody Point point);
+
+    @ResponseBody
+    @PostMapping("/user/location/all")
+    @ResponseStatus(value = HttpStatus.OK, code = HttpStatus.OK)
+    List<InstitutionDTO> getAllLocationsFromZone(@RequestBody Point point);
 }

@@ -5,6 +5,7 @@ import com.webgisapplicationclientgeotools.geotools.UserGeoTools;
 import com.webgisapplicationclientgeotools.models.Institution;
 import com.webgisapplicationclientgeotools.models.ObjectWrapper;
 import com.webgisapplicationclientgeotools.models.Point;
+import com.webgisapplicationclientgeotools.services.util.Utils;
 import org.geotools.geometry.jts.JTS;
 import org.geotools.referencing.CRS;
 import org.geotools.referencing.GeodeticCalculator;
@@ -32,6 +33,7 @@ import javax.measure.quantity.Length;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @Component
 public class UserGeoToolsImplementation implements UserGeoTools {
@@ -139,8 +141,7 @@ public class UserGeoToolsImplementation implements UserGeoTools {
         return response.getBody();
     }
 
-    @Override
-    public List<Institution> getLocationsFromZone(Point point) {
+    public List<Institution> calculateLocations(Point point, String code){
 
         Quantity<Length> dist = Quantities.getQuantity(point.getRadius(), SI.METRE);
         GeometryFactory gf = new GeometryFactory();
@@ -148,7 +149,7 @@ public class UserGeoToolsImplementation implements UserGeoTools {
                 point.getLongitude().doubleValue()));
         Geometry geometry = bufferPoint(dist, DefaultGeographicCRS.WGS84, p);
 
-        List<Institution> list = getLocations(point.getCode());
+        List<Institution> list = getLocations(code);
         org.locationtech.jts.geom.Point temp;
         List<Institution> okList = new ArrayList<>();
         for (Institution institution : list) {
@@ -160,6 +161,11 @@ public class UserGeoToolsImplementation implements UserGeoTools {
             }
         }
         return okList;
+    }
+
+    @Override
+    public List<Institution> getLocationsFromZone(Point point) {
+        return calculateLocations(point, point.getCode());
     }
 
     @Override
@@ -185,5 +191,14 @@ public class UserGeoToolsImplementation implements UserGeoTools {
             }
         }
         return smallestDistance;
+    }
+
+    @Override
+    public List<Institution> getAllLocationsFromZone(Point point) {
+        List<Institution> institutionList = new ArrayList<>();
+        for (Map.Entry<Integer, String> entry : Utils.types.entrySet()) {
+            institutionList.addAll(calculateLocations(point, entry.getValue()));
+        }
+        return institutionList;
     }
 }

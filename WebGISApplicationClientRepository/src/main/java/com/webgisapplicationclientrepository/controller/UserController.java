@@ -252,7 +252,7 @@ public class UserController {
             requestBody = @io.swagger.v3.oas.annotations.parameters.RequestBody(required = true, description = "An object" +
                     " that contains a latitude, longitude, radius and the code where : latitude and longitude speak" +
                     " for themselves, code which represents the institution and radius the circle size where the location are. " +
-                    "Here the code isn't used because i return every type of location in that zone.",
+                    "Here the code isn't used because I return every type of location in that zone.",
                     content = @Content(schema = @Schema(implementation = InstitutionDTO.class),
                             examples = @ExampleObject(name = "/api/user/location/all"
                                     , value = "{\n" +

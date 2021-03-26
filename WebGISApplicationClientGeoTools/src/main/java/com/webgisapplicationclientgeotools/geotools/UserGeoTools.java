@@ -14,4 +14,6 @@ public interface UserGeoTools {
     List<Institution> getLocationsFromZone(Point point);
 
     Institution getShortestLocationFromZone(Point point);
+
+    List<Institution> getAllLocationsFromZone(Point point);
 }

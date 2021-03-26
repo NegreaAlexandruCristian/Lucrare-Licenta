@@ -42,4 +42,11 @@ public class ClientGeoToolsResourceController {
     InstitutionDTO getShortestLocationFromZone(@RequestBody Point point){
         return clientGeoToolsServiceFeign.getShortestLocationFromZone(point);
     }
+
+    @ResponseBody
+    @PostMapping("/user/location/all")
+    @ResponseStatus(value = HttpStatus.OK, code = HttpStatus.OK)
+    List<InstitutionDTO> getAllLocationsFromZone(@RequestBody Point point){
+        return clientGeoToolsServiceFeign.getAllLocationsFromZone(point);
+    }
 }

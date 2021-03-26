@@ -18,6 +18,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.HttpClientErrorException;
 
 import javax.validation.Valid;
 import java.math.BigDecimal;
@@ -325,5 +326,124 @@ public class UserController {
                             links = @Link(name = "NONE"))})
     public InstitutionDTO getShortestLocationFromZone(@Valid @RequestBody Point point){
         return userService.getShortestLocationFromZone(point);
+    }
+
+    @ResponseBody
+    @PostMapping("/all")
+    @ResponseStatus(value = HttpStatus.OK, code = HttpStatus.OK)
+    @Operation(summary = "Retrieves every type of locations from a given zone by a point in the map.",
+            requestBody = @io.swagger.v3.oas.annotations.parameters.RequestBody(required = true, description = "An object" +
+                    " that contains a latitude, longitude, radius and the code where : latitude and longitude speak" +
+                    " for themselves, code which represents the institution and radius the circle size where the location are. " +
+                    "Here the code isn't used because I return every type of location in that zone.",
+                    content = @Content(schema = @Schema(implementation = InstitutionDTO.class),
+                            examples = @ExampleObject(name = "/api/geo-tools/user/location/all"
+                                    , value = "{\n" +
+                                    "    \"code\": \"hospital\",\n" +
+                                    "    \"radius\":500,\n" +
+                                    "    \"latitude\": 45.77045822363855,\n" +
+                                    "    \"longitude\": 21.21882227116396\n" +
+                                    "}"))),
+            description = "This method is of type POST which you can access on the endpoint of /api/geo-tools/user/location/all" +
+                    " that will return locations from every institution and a specific radius.",
+            parameters = @Parameter(required = true, schema = @Schema(implementation = Point.class, name = "Point"),
+                    name = "Point", content = @Content(mediaType = "JSON", schema = @Schema(implementation = Point.class, name = "Point")),
+                    description = "An object (Point ) that contains latitude, longitude, radius and the code.",
+                    in = ParameterIn.QUERY, example = "/user/location/all",examples = @ExampleObject(name = "/user/location/all"
+                    , value = "{\n" +
+                    "    \"code\": \"hospital\",\n" +
+                    "    \"radius\":500,\n" +
+                    "    \"latitude\": 45.77045822363855,\n" +
+                    "    \"longitude\": 21.21882227116396\n" +
+                    "}")),
+            responses = {
+                    @ApiResponse(responseCode = "OK - 200", description = "Every type of institution locations from a zone.",
+                            content = @Content(array = @ArraySchema(schema = @Schema(implementation = InstitutionDTO.class)), mediaType = "JSON",
+                                    examples = @ExampleObject(name = "/user/location/all"
+                                            , value = "[...." +
+                                            "{\n" +
+                                            "        \"name\": \"Statie RATT - Calea Torontalului colt cu Liege retur\",\n" +
+                                            "        \"code\": \"bus-stop\",\n" +
+                                            "        \"latitude\": 45.7723693297404,\n" +
+                                            "        \"longitude\": 21.216583982803286\n" +
+                                            "    },\n" +
+                                            "    {\n" +
+                                            "        \"name\": \"Adrian Petre - doctor\",\n" +
+                                            "        \"code\": \"hospital\",\n" +
+                                            "        \"latitude\": 45.77045822363855,\n" +
+                                            "        \"longitude\": 21.21882227116396\n" +
+                                            "    },\n" +
+                                            "    {\n" +
+                                            "        \"name\": \"Clinica Medvarix\",\n" +
+                                            "        \"code\": \"hospital\",\n" +
+                                            "        \"latitude\": 45.770411796381275,\n" +
+                                            "        \"longitude\": 21.21892330821231\n" +
+                                            "    },\n" +
+                                            "    {\n" +
+                                            "        \"name\": \"C. M. Dr. Fara Lucian\",\n" +
+                                            "        \"code\": \"hospital\",\n" +
+                                            "        \"latitude\": 45.766134681679894,\n" +
+                                            "        \"longitude\": 21.218982373016388\n" +
+                                            "    },\n" +
+                                            "    {\n" +
+                                            "        \"name\": \"C. M. Dr. Mihalceanu Ioan\",\n" +
+                                            "        \"code\": \"hospital\",\n" +
+                                            "        \"latitude\": 45.77380181601158,\n" +
+                                            "        \"longitude\": 21.2187516576721\n" +
+                                            "    },\n" +
+                                            "    {\n" +
+                                            "        \"name\": \"C. M. Dr. Motateanu Mihaela\",\n" +
+                                            "        \"code\": \"hospital\",\n" +
+                                            "        \"latitude\": 45.773596916478965,\n" +
+                                            "        \"longitude\": 21.22068583254088\n" +
+                                            "    },\n" +
+                                            "    {\n" +
+                                            "        \"name\": \"C. M. Nova Avramed\",\n" +
+                                            "        \"code\": \"hospital\",\n" +
+                                            "        \"latitude\": 45.76624204893813,\n" +
+                                            "        \"longitude\": 21.21894251904905\n" +
+                                            "    }," +
+                                            "...]")),
+                            links = @Link(name = "NONE")),
+                    @ApiResponse(responseCode = "400", description = "If the object isn't complete or bad.",
+                            content = @Content(schema = @Schema(implementation = HttpClientErrorException.BadRequest.class), mediaType = "String",
+                                    examples = @ExampleObject(name = "/api/geo-tools/user/location/all"
+                                            , value = "{\n" +
+                                            "    \"status\": \"BAD_REQUEST\",\n" +
+                                            "    \"message\": \"Bad Object Request.\",\n" +
+                                            "    \"errors\": [\n" +
+                                            "        \"Bad Object Request. because something inside the object or the object was : null\"\n" +
+                                            "    ]\n" +
+                                            "}")),
+                            links = @Link(name = "NONE")),
+                    @ApiResponse(responseCode = "404", description = "If it doesn't exist.",
+                            content = @Content(schema = @Schema(implementation = HttpClientErrorException.BadRequest.class), mediaType = "String",
+                                    examples = @ExampleObject(name = "/api/geo-tools/user/location/all"
+                                            , value = "{\n" +
+                                            "    \"status\": \"NOT_FOUND\",\n" +
+                                            "    \"message\": \"Object not found\",\n" +
+                                            "    \"errors\": [\n" +
+                                            "        \"Object not found because something inside the object or the object was : null\"\n" +
+                                            "    ]\n" +
+                                            "}")),
+                            links = @Link(name = "NONE")),
+                    @ApiResponse(responseCode = "406", description = "If the type doesn't exist.",
+                            content = @Content(schema = @Schema(implementation = HttpClientErrorException.BadRequest.class), mediaType = "String",
+                                    examples = @ExampleObject(name = "/api/geo-tools/user/location/all"
+                                            , value = "{\n" +
+                                            "    \"status\": \"BAD_REQUEST\",\n" +
+                                            "    \"message\": \"Operation not permitted.\",\n" +
+                                            "    \"errors\": [\n" +
+                                            "        \"Operation not permitted. because something inside the object or the object was : null\"\n" +
+                                            "    ]\n" +
+                                            "}")),
+                            links = @Link(name = "NONE")),
+                    @ApiResponse(responseCode = "500", description = "If it is server related",
+                            content = @Content(schema = @Schema(implementation = HttpClientErrorException.BadRequest.class), mediaType = "String",
+                                    examples = @ExampleObject(name = "/api/geo-tools/user/location/all"
+                                            , value = "Sever related error")),
+                            links = @Link(name = "NONE"))})
+    public List<InstitutionDTO> getAllLocationsFromZone(@Valid @RequestBody Point point){
+        return userService.getAllLocationsFromZone(point);
     }
 }
