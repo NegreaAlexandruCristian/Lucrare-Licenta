@@ -20,7 +20,7 @@ public class SwaggerConfiguration {
 
         return new OpenAPI()
                 .info(new Info().title("WebGISApplication")
-                        .description("This is the client repository microservice that uses the PostgreSQL database that" +
+                        .description("This is the client repository microservice that uses the PostgreSQL database that " +
                                 "has the PostGIS extension to calculate multiple calculations that require advance formulas.")
                         .version("v1.0.0")
                         .contact(contact)

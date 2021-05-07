@@ -21,6 +21,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/public/locations")
+@CrossOrigin(origins = "http://localhost:4200")
 @Tag(name = "PublicLocationsController", description = "This controller is used to retrieve data about every " +
         "public institution from a given city (for now is just Timisoara)")
 public class PublicLocationsController {
