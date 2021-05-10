@@ -64,7 +64,11 @@ public class UserServiceImplementation implements UserService {
 
     @Override
     public List<InstitutionDTO> getLocationsFromZone(Point point){
-        final String code = point.getCode().toLowerCase();
+        String code = point.getCode().toLowerCase();
+        if (code.equals("buss")) {
+           code = "buss_stations";
+           point.setCode(code);
+        }
         if(types.containsValue(code)){
             return userRepository.getLocationsFromZone(point.getLatitude(), point.getLongitude(),
                     point.getCode(),point.getRadius())
@@ -88,6 +92,8 @@ public class UserServiceImplementation implements UserService {
             );
             entityManager.clear();
         }
+        System.out.println(point);
+        System.out.println(institutionList);
         return institutionList;
     }
 
@@ -100,5 +106,10 @@ public class UserServiceImplementation implements UserService {
         } else {
             throw new NotAllowedException();
         }
+    }
+
+    @Override
+    public InstitutionDTO getLocationByName(String name) {
+        return userRepository.getLocationByName(name);
     }
 }

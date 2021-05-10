@@ -16,4 +16,6 @@ public interface UserService {
     List<InstitutionDTO> getAllLocationsFromZone(Point point);
 
     InstitutionDTO getShortestLocationFromZone(Point point);
+
+    InstitutionDTO getLocationByName(String name);
 }

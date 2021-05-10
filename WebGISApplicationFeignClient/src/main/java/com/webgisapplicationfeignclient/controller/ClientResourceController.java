@@ -129,4 +129,10 @@ public class ClientResourceController {
     InstitutionDTO getShortestLocationFromZone(@Valid @RequestBody Point point){
         return clientServiceFeign.getShortestLocationFromZone(point);
     }
+
+    @ResponseBody
+    @GetMapping("/user/location/get/name/{name}")
+    public InstitutionDTO getLocationByName(@PathVariable(name = "name") String name) {
+        return this.clientServiceFeign.getLocationByName(name);
+    }
 }

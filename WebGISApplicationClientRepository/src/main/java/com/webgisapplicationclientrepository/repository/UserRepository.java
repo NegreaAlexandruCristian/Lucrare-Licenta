@@ -1,5 +1,6 @@
 package com.webgisapplicationclientrepository.repository;
 
+import com.webgisapplicationclientrepository.dto.InstitutionDTO;
 import com.webgisapplicationclientrepository.model.util.Institution;
 import com.webgisapplicationclientrepository.model.util.Point;
 
@@ -15,4 +16,6 @@ public interface UserRepository{
                                            String code, Long radius);
 
     Institution getShortestLocationFromZone(Point point);
+
+    InstitutionDTO getLocationByName(String name);
 }

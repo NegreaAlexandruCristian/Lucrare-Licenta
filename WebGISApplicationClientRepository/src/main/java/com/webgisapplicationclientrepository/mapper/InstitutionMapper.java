@@ -18,4 +18,11 @@ public interface InstitutionMapper {
     TransportInstitutionDTO transportInstitutionToTransportInstitutionDTO(TransportInstitution transportInstitution);
 
     InstitutionDTO institutionToInstitutionDTO(Institution institution);
+
+    InstitutionDTO medicalInstitutionToInstitutionDTO(MedicalInstitutionDTO medicalInstitution);
+
+    InstitutionDTO publicInstitutionToInstitutionDTO(PublicInstitutionDTO publicInstitution);
+
+    InstitutionDTO transportInstitutionToInstitutionDTO(TransportInstitutionDTO transportInstitution);
+
 }

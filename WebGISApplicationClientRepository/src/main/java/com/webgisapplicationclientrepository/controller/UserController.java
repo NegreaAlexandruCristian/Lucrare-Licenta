@@ -1,6 +1,8 @@
 package com.webgisapplicationclientrepository.controller;
 
 import com.webgisapplicationclientrepository.dto.InstitutionDTO;
+import com.webgisapplicationclientrepository.dto.MedicalInstitutionDTO;
+import com.webgisapplicationclientrepository.exceptions.utils.APIError;
 import com.webgisapplicationclientrepository.model.util.ObjectWrapper;
 import com.webgisapplicationclientrepository.model.util.Point;
 import com.webgisapplicationclientrepository.service.UserService;
@@ -442,5 +444,70 @@ public class UserController {
                             links = @Link(name = "NONE"))})
     public InstitutionDTO getShortestLocationFromZone(@Valid @RequestBody Point point){
         return userService.getShortestLocationFromZone(point);
+    }
+
+    @ResponseBody
+    @GetMapping("/get/name/{name}")
+    @ResponseStatus(value = HttpStatus.OK, code = HttpStatus.OK)
+    @Operation(summary = "Retrieves a location of any type from a city by it's name from the database.",
+            description = "This method is of type GET which you can access on the endpoint of /api/user/location/name/{name}" +
+                    " where the name of a institution.It will return the institution available" +
+                    " in the database from that city by that name.",
+            parameters = {
+                    @Parameter(name = "name", description = "The name of the institution", required = true,
+                            example = "Policlinica Sanatatea",
+                            schema = @Schema(implementation = String.class, type = "JSON"),
+                            in = ParameterIn.PATH)},
+            responses = {
+                    @ApiResponse(responseCode = "OK - 200", description = "An institution",
+                            content = @Content(schema = @Schema(implementation = InstitutionDTO.class), mediaType = "JSON",
+                                    examples = @ExampleObject(name = "/api/user/location/name/{name}",
+                                            value = "{\n" +
+                                                    "    \"name\": \"C. M. Dalmed\",\n" +
+                                                    "    \"code\": \"hospital\",\n" +
+                                                    "    \"latitude\": 45.77404032011598,\n" +
+                                                    "    \"longitude\": 21.238858839811655\n" +
+                                                    "}")),
+                            links = @Link(name = "NONE")),
+                    @ApiResponse(responseCode = "400", description = "If the object isn't complete or bad.",
+                            content = @Content(schema = @Schema(implementation = APIError.class), mediaType = "String",
+                                    examples = @ExampleObject(name = "/api/user/location/name/{name}"
+                                            , value = "{\n" +
+                                            "    \"status\": \"BAD_REQUEST\",\n" +
+                                            "    \"message\": \"Bad Object Request.\",\n" +
+                                            "    \"errors\": [\n" +
+                                            "        \"Bad Object Request. because something inside the object or the object was : null\"\n" +
+                                            "    ]\n" +
+                                            "}")),
+                            links = @Link(name = "NONE")),
+                    @ApiResponse(responseCode = "404", description = "If it doesn't exist.",
+                            content = @Content(schema = @Schema(implementation = APIError.class), mediaType = "String",
+                                    examples = @ExampleObject(name = "/api/user/location/name/{name}"
+                                            , value = "{\n" +
+                                            "    \"status\": \"NOT_FOUND\",\n" +
+                                            "    \"message\": \"Object not found\",\n" +
+                                            "    \"errors\": [\n" +
+                                            "        \"Object not found because something inside the object or the object was : null\"\n" +
+                                            "    ]\n" +
+                                            "}")),
+                            links = @Link(name = "NONE")),
+                    @ApiResponse(responseCode = "406", description = "If the type doesn't exist.",
+                            content = @Content(schema = @Schema(implementation = APIError.class), mediaType = "String",
+                                    examples = @ExampleObject(name = "/api/user/location/name/{name}"
+                                            , value = "{\n" +
+                                            "    \"status\": \"BAD_REQUEST\",\n" +
+                                            "    \"message\": \"Operation not permitted.\",\n" +
+                                            "    \"errors\": [\n" +
+                                            "        \"Operation not permitted. because something inside the object or the object was : null\"\n" +
+                                            "    ]\n" +
+                                            "}")),
+                            links = @Link(name = "NONE")),
+                    @ApiResponse(responseCode = "500", description = "If it is server related",
+                            content = @Content(schema = @Schema(implementation = APIError.class), mediaType = "String",
+                                    examples = @ExampleObject(name = "/api/user/location/name/{name}"
+                                            , value = "Sever related error")),
+                            links = @Link(name = "NONE"))})
+    public InstitutionDTO getLocationByName(@PathVariable(name = "name") String name) {
+        return this.userService.getLocationByName(name);
     }
 }

@@ -80,4 +80,7 @@ public interface ClientServiceFeign {
     @PostMapping("/user/location/shortest")
     InstitutionDTO getShortestLocationFromZone(@Valid @RequestBody Point point);
 
+    @ResponseBody
+    @GetMapping("/user/location/get/name/{name}")
+    InstitutionDTO getLocationByName(@PathVariable(name = "name") String name);
 }

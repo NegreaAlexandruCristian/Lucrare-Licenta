@@ -58,4 +58,35 @@ public class InstitutionMapperImplementation implements InstitutionMapper {
                 .longitude(institution.getLongitude())
                 .build();
     }
+
+    @Override
+    public InstitutionDTO medicalInstitutionToInstitutionDTO(MedicalInstitutionDTO medicalInstitution) {
+        return InstitutionDTOBuilder.builder()
+                .name(medicalInstitution.getName())
+                .code(medicalInstitution.getCode())
+                .latitude(medicalInstitution.getLatitude())
+                .longitude(medicalInstitution.getLongitude())
+                .build();
+    }
+
+    @Override
+    public InstitutionDTO publicInstitutionToInstitutionDTO(PublicInstitutionDTO publicInstitution) {
+        return InstitutionDTOBuilder.builder()
+                .name(publicInstitution.getName())
+                .code(publicInstitution.getCode())
+                .latitude(publicInstitution.getLatitude())
+                .longitude(publicInstitution.getLongitude())
+                .build();
+    }
+
+    @Override
+    public InstitutionDTO transportInstitutionToInstitutionDTO(TransportInstitutionDTO transportInstitution) {
+        return InstitutionDTOBuilder.builder()
+                .name(transportInstitution.getName())
+                .code(transportInstitution.getCode())
+                .latitude(transportInstitution.getLatitude())
+                .longitude(transportInstitution.getLongitude())
+                .build();
+    }
+
 }
