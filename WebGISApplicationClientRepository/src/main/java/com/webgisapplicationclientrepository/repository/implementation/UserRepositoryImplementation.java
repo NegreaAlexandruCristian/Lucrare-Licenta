@@ -45,7 +45,6 @@ public class UserRepositoryImplementation implements UserRepository {
         this.institutionMapper = institutionMapper;
     }
 
-    //TODO sa calculeze in functie si de strazi/trotuar
     @Override
     public BigDecimal calculateDistance(BigDecimal fromLatitude, BigDecimal fromLongitude, BigDecimal toLatitude, BigDecimal toLongitude) {
         return BigDecimal.valueOf((Double) entityManager.createNativeQuery("" +
