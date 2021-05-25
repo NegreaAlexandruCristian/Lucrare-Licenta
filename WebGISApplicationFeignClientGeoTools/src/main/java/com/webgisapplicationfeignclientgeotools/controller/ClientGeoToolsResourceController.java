@@ -13,6 +13,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping
+@CrossOrigin(origins = "http://localhost:4200")
 public class ClientGeoToolsResourceController {
 
     private final ClientGeoToolsServiceFeign clientGeoToolsServiceFeign;

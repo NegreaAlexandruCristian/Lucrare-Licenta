@@ -92,8 +92,6 @@ public class UserServiceImplementation implements UserService {
             );
             entityManager.clear();
         }
-        System.out.println(point);
-        System.out.println(institutionList);
         return institutionList;
     }
 

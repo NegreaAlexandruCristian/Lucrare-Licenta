@@ -12,7 +12,6 @@ public class CustomErrorDecoder implements ErrorDecoder {
     @Override
     public Exception decode(String methodKey, Response response) {
 
-        System.out.println(response);
         switch (response.status()){
 
             case 404:{

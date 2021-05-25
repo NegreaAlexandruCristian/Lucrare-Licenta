@@ -26,3 +26,9 @@ isi implementeaza propriile metode (respecta OGC doar la read-only, conectare la
 - Diferente: Librarii Open Source si BD de postgresql si postgis (baza de date spatiale) respecte standardele OGC
 - Nu sunt restrictionat de geocodare proprietara se foloseste standardadul OGC pentru manipulare CRUD operation atat
  in memory folosind GeoTools atat prin baza de date PostGreSQl + PostGIS
+
+
+ ---->>>
+ !!! - de adaugat table cu diferente si caracteristici la primul capitol
+
+ - Table cu caracteristici si diferente intre google maps like apps si aplicatia mea

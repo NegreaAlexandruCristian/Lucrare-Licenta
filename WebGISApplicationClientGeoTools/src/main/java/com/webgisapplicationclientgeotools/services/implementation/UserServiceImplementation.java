@@ -15,7 +15,6 @@ import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 @Service
@@ -51,7 +50,14 @@ public class UserServiceImplementation implements UserService {
 
     @Override
     public List<InstitutionDTO> getLocationsFromZone(Point point) {
-        final String code = point.getCode().toLowerCase();
+        String code = point.getCode().toLowerCase();
+        if (code.equals("buss")) {
+            code = "bus-stop";
+            point.setCode(code);
+        } else if (code.equals("schools")) {
+            code = "school";
+            point.setCode(code);
+        }
         if(Utils.types.containsValue(code)) {
             return userGeoTools.getLocationsFromZone(point)
                     .stream()

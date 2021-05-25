@@ -1,7 +1,5 @@
 package com.webgisapplicationclientrepository.service.implementation;
 
-import com.webgisapplicationclientrepository.dto.MedicalInstitutionDTO;
-import com.webgisapplicationclientrepository.dto.PublicInstitutionDTO;
 import com.webgisapplicationclientrepository.dto.PublicInstitutionDTO;
 import com.webgisapplicationclientrepository.exceptions.utils.NotAllowedException;
 import com.webgisapplicationclientrepository.exceptions.utils.NotFoundException;
@@ -16,7 +14,6 @@ import javax.persistence.EntityManager;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 
 @Service
@@ -52,7 +49,6 @@ public class PublicInstitutionServiceImplementation implements PublicInstitution
                 String temp = temporaryName.substring(0, temporaryName.length()  - j);
                 for(PublicInstitutionDTO PublicInstitutionDTO : PublicInstitutionDTOS){
                     if(PublicInstitutionDTO.getName().toLowerCase().contains(temp)){
-                        System.out.println(temp);
                         return PublicInstitutionDTO;
                     }
                 }
