@@ -1,3 +1,7 @@
+ribbon:
+  ConnectTimeout: 120000
+  ReadTimeout: 120000
+
 #Application
 server:
   port: 8662
@@ -11,16 +15,20 @@ eureka:
     registerWithEureka: true
     fetchRegistry: true
     serviceUrl:
-      defaultZone: http://ec2-3-16-157-6.us-east-2.compute.amazonaws.com:8661/eureka
+      defaultZone: http://ec2-13-59-137-49.us-east-2.compute.amazonaws.com:8661/eureka
   instance:
     hostname: localhost
 
 #Zuul Proxy
 zuul:
   host:
-    connect-timeout-millis: 20000
-    socket-timeout-millis: 20000
-    connection-request-timeout-millis: 20000
+    time-to-live: -1
+    connect-timeout-millis: 50000
+    max-per-route-connections: 100000
+    max-total-connections: 50000
+    socket-timeout-millis: 600000
+    semaphore:
+      max-semaphores: 5000
   ignoredServices: '*'
   routes:
     geo-tools-resource-service:
@@ -39,5 +47,3 @@ zuul:
       path: /geo-tools/**
       serviceId: web-gis-client-geo-tools
       stripPrefix: true
-
-

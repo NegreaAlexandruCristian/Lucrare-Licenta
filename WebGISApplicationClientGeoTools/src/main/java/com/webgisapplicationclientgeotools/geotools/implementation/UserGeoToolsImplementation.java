@@ -129,7 +129,7 @@ public class UserGeoToolsImplementation implements UserGeoTools {
     private static List<Institution> getLocations(String locationType)
     {
         String type = getLocationType(locationType);
-        final String uri = "http://ec2-3-16-157-6.us-east-2.compute.amazonaws.com:8183/" + type + "/locations/get/" + locationType;
+        final String uri = "http://ec2-13-59-137-49.us-east-2.compute.amazonaws.com:8183/" + type + "/locations/get/" + locationType;
 
         RestTemplate restTemplate = new RestTemplate();
         ResponseEntity<List<Institution>> response = restTemplate.exchange(

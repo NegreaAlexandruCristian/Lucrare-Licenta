@@ -32,3 +32,7 @@ isi implementeaza propriile metode (respecta OGC doar la read-only, conectare la
  !!! - de adaugat table cu diferente si caracteristici la primul capitol
 
  - Table cu caracteristici si diferente intre google maps like apps si aplicatia mea
+
+- Concluzii si probleme deschise (capitolul 4):
+	- ce am facut pana acuma	
+	- ce ar mai putea fi adaugat
